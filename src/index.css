@@ -5,6 +5,8 @@
 :root{
   --text-color: #707070;
   --link-color: #D1D1D1;
+  --bg-color: #F9F9F9;
+  --border-color: #F1F1F1;
 }
 
 body {
