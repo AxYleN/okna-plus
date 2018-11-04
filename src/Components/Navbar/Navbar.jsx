@@ -7,7 +7,7 @@ export default function Navbar(props) {
   
   return (
     <div className="navbar">
-      <div className="container">
+      <div className="navbar__container">
         <h2>Окна-Плюс</h2>
 
         <Switch>
