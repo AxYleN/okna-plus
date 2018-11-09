@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 import Card from './Card/Card';
-import './Main.scss';
+import './MainPage.css';
 import img1 from './img/1.jpg';
 import img2 from './img/2.png';
 import img3 from './img/3.png';
@@ -15,5 +15,5 @@ export default function Main() {
       <Card img={img3} text="Окно трёхстворчатое" to="/w3" />
       <Card img={img4} text="Дверь" to="/d" />
     </div>
-  )
+  );
 }

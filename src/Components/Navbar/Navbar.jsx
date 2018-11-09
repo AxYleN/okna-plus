@@ -1,27 +1,25 @@
-import React from 'react'
-import { Link, Route, Switch } from 'react-router-dom'
+import React from 'react';
+import { Link, Route, Switch } from 'react-router-dom';
 
-import './Navbar.scss';
+import './Navbar.css';
 
 export default function Navbar(props) {
-  
   return (
     <div className="navbar">
       <div className="navbar__container">
-        <h2>Окна-Плюс</h2>
+        <h2 className="navbar__header">Окна-Плюс</h2>
 
         <Switch>
           <Route path="/" exact /> {/* Отображает кнопку "Назад" везде, кроме главной страницы */}
           <Route
             component={() => (
-              <Link className="link" to="/">
+              <Link className="navbar__link" to="/">
                 &lt; Назад
-              </Link>)}
+              </Link>
+            )}
           />
         </Switch>
-        
-        
       </div>
     </div>
-  )
+  );
 }
