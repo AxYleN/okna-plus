@@ -1,0 +1,11 @@
+.blueprint {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  width: 55%;
+}
+
+.blueprint__canvas {
+  width: 100%;
+}

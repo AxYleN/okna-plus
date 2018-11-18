@@ -1,0 +1,19 @@
+.window-options {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.window-options__caption {
+  margin-right: 2rem;
+}
+
+.window-options__select {
+  order: 2;
+}
+
+.window-options__checkbox {
+  flex-basis: 60%;
+
+  color: var(--link-color);
+}

@@ -7,7 +7,7 @@ import img2 from './img/2.png';
 import img3 from './img/3.png';
 import img4 from './img/d1.jpg';
 
-export default function Main() {
+export default function MainPage() {
   return (
     <div className="main-container">
       <Card img={img1} text="Окно" to="/w1" />

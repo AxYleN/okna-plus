@@ -1,0 +1,26 @@
+.range-input__number {
+  font-size: 1rem;
+
+  display: inline-block;
+
+  width: 5ch;
+  margin-left: .5rem;
+  padding: 0;
+
+  text-align: center;
+
+  border: none;
+  border-bottom: 2px solid var(--border-color);
+  border-radius: 0;
+}
+
+.range-input__number:focus {
+  border-bottom-color: rgb(214, 91, 34);
+  outline: none;
+}
+
+.range-input__slider {
+  display: block;
+
+  width: 100%;
+}
