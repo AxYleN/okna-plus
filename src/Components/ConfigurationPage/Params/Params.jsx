@@ -18,6 +18,11 @@ export default function Params(props) {
     />
   ));
 
+  const { width, height } = params;
+  const area = (width * height) / 1000000; // Площадь в кв. метрах
+  const pricePerSqrM = 4500;
+  const price = pricePerSqrM * area;
+
   return (
     <div className="settings">
       <h2>Параметры</h2>
@@ -69,6 +74,15 @@ export default function Params(props) {
         value={params.width}
       />
       {windows}
+
+      <div className="settings__info">
+        <p>
+          <strong>Площадь:</strong> {area.toFixed(2)} м<sup>2</sup>
+        </p>
+        <p>
+          <strong>Цена:</strong> {price.toFixed(2)}р.
+        </p>
+      </div>
     </div>
   );
 }
