@@ -2,6 +2,7 @@ export default [
   {
     caption: 'Профиль',
     name: 'profile',
+    type: 'select',
     values: [
       {
         value: 'exprof',
@@ -15,11 +16,12 @@ export default [
   },
   {
     caption: 'Стеклопакет',
-    name: 'стеклопакет',
+    name: 'glass',
+    type: 'select',
     values: [
       {
-        value: '9',
-        caption: '9 – одно стекло',
+        value: '4',
+        caption: '4 – одно стекло',
       },
       {
         value: '24',
@@ -37,7 +39,8 @@ export default [
   },
   {
     caption: 'Фурнитура',
-    name: 'фурнитура',
+    name: 'fittings',
+    type: 'select',
     values: [
       {
         value: 'axor',
@@ -49,6 +52,20 @@ export default [
       },
     ],
   },
+  {
+    caption: 'Высота',
+    name: 'height',
+    type: 'range',
+    min: 700,
+    max: 1800,
+  },
+  {
+    caption: 'Ширина',
+    name: 'width',
+    type: 'range',
+    min: 700,
+    max: 1800,
+  },
 ];
 
 const Select = function(selectProps) {
@@ -56,7 +73,11 @@ const Select = function(selectProps) {
   return (
     <label>
       {caption}
-      <select name={name} onChange={onChange} value={params[name]} className="settings__input">
+      <select
+        name={name}
+        onChange={onChange}
+        value={params[name]}
+        className="settings__input">
         {values.map(v => (
           <option value={v.value}>{v.caption}</option>
         ))}
@@ -65,4 +86,6 @@ const Select = function(selectProps) {
   );
 };
 
-{selectInputs.map(v => <Select value={v}/>)}
+{
+  selectInputs.map(v => <Select value={v} />);
+}

@@ -44,7 +44,7 @@ export default function Params(props) {
           onChange={onChange}
           value={params.glass}
           className="settings__input">
-          <option value="9">9 &ndash; одно стекло</option>
+          <option value="4">4 &ndash; одно стекло</option>
           <option value="24">24 &ndash; два стекла (однокамерный)</option>
           <option value="32">32 &ndash; три стекла (двухкамерный)</option>
           <option value="40">40 &ndash; три стекла (двухкамерный)</option>

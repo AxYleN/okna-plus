@@ -10,7 +10,9 @@ export default class ConfigurationPage extends Component {
   constructor(props) {
     super(props);
 
-    const item = items[this.props.match.params.item];
+    this.item = items[this.props.match.params.item];
+    const item = this.item;
+
     if (!item) {
       this.props.history.push('/');
       return;
@@ -56,8 +58,12 @@ export default class ConfigurationPage extends Component {
     this.setState({ params });
   };
 
+  componentDidMount() {
+    // Сделать запрос к серверу, получить данные о цене
+  }
+
   render() {
-    const item = items[this.props.match.params.item];
+    const item = this.item;
     if (!item) return <div>Страница не найдена</div>;
 
     return (
@@ -68,7 +74,7 @@ export default class ConfigurationPage extends Component {
         </Link>
 
         <div className="params__row">
-          <Blueprint params={this.state.params} />
+          <Blueprint params={this.state.params} type={item.type} />
           <Params
             onChange={this.onChange}
             onWindowChange={this.onWindowChange}

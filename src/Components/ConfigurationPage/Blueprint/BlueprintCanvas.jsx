@@ -7,6 +7,9 @@ export default class BlueprintCanvas extends Component {
     this.resolution = 1000;
     this.center = this.resolution / 2;
     this.canvasRef = React.createRef();
+    this.color_dark = '#707070';
+    this.color_mid = '#AAAAAA';
+    this.color_light = '#DDDDDD';
   }
 
   componentDidMount() {
@@ -23,8 +26,8 @@ export default class BlueprintCanvas extends Component {
     return arr.map(num => (num / max) * this.resolution);
   }
 
-  strokeRect(...params) {
-    params = params.map(num => Math.round(num));
+  strokeRect(x, y, w, h) {
+    const params = [x, y, w, h].map(num => Math.round(num));
     this.ctx.strokeRect(...params);
   }
 
@@ -53,13 +56,22 @@ export default class BlueprintCanvas extends Component {
     this.ctx = this.canvas.getContext('2d');
     this.ctx.font = `${this.resolution / 30}px Arial`;
     this.ctx.textAlign = 'center';
-    this.ctx.fillStyle = '#707070';
-    this.ctx.strokeStyle = '#707070';
+    this.ctx.fillStyle = this.color_dark;
+    this.ctx.strokeStyle = this.color_dark;
     this.ctx.save();
 
     const { x, y, width, height } = this.drawFrame();
     const windows = this.props.params.windows;
 
+    if (this.props.type === 'door') {
+      this.drawDoor({
+        x,
+        y,
+        width,
+        height,
+      })
+    }
+    
     if (windows.length > 0) {
       const windowWidthPx = width / windows.length;
       const windowWidth = Math.round(this.props.params.width / windows.length);
@@ -171,7 +183,7 @@ export default class BlueprintCanvas extends Component {
 
     this.ctx.save();
     this.ctx.fillStyle =
-      openTo !== 'no' && mosquitoNet ? '#30303020' : '#30303010';
+      openTo !== 'no' && mosquitoNet ? this.color_mid : this.color_light;
     this.fillRect(winLeft, winTop, winWidth, winHeight);
     this.ctx.restore();
     this.strokeRect(winLeft, winTop, winWidth, winHeight);
@@ -207,6 +219,9 @@ export default class BlueprintCanvas extends Component {
     const xCenter = (left + right) / 2;
     const yCenter = (top + bottom) / 2;
 
+    this.ctx.save();
+    this.ctx.strokeStyle = this.color_dark;
+
     if (openTo === 'toRight') {
       this.strokeLine(right, top, left, yCenter, right, bottom);
     } else if (openTo === 'toLeft') {
@@ -214,6 +229,32 @@ export default class BlueprintCanvas extends Component {
     }
 
     this.strokeLine(left, bottom, xCenter, top, right, bottom);
+    this.ctx.restore();
+  }
+
+  drawDoor(frame) {
+    let { x, y, width, height } = frame;
+    const [padding] = this.normalize(60);
+
+    x += padding;
+    y += padding;
+    width -= padding * 2;
+    height -= padding * 2;
+
+    let topHeight = (height - padding) * 0.6;
+    let bottomHeight = height - topHeight - padding;
+
+
+    this.strokeRect(x, y, width, topHeight);
+    this.strokeRect(x, y + topHeight + padding, width, bottomHeight);
+
+    const knobH = this.normalize(84);
+    const knobW = padding / 3;
+    const knobX = x - knobW * 2;
+    const knobY = y + topHeight - knobH;
+    
+    this.strokeRect(knobX, knobY, knobW, knobH);
+
   }
 
   componentDidUpdate() {
@@ -225,7 +266,6 @@ export default class BlueprintCanvas extends Component {
 
     return (
       <canvas
-        style={{ width: '100%' }}
         height={resolution}
         width={resolution}
         ref={this.canvasRef}
