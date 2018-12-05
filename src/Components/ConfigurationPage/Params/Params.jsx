@@ -82,6 +82,7 @@ export default function Params(props) {
         <p>
           <strong>Цена:</strong> {price.toFixed(2)}р.
         </p>
+        <button className="settings__add-to-chart">Добавить в корзину</button>
       </div>
     </div>
   );
