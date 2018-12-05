@@ -3,10 +3,13 @@
 }
 
 :root {
-  --text-color: #707070;
-  --link-color: #D1D1D1;
+  --text-color: #2c3e50;
+  --link-color: #bdc3c7;
   --bg-color: #F9F9F9;
-  --border-color: #F1F1F1;
+  --border-color: #E1E1E1;
+  --primary-color: rgb(214, 91, 34);
+  
+  --shadow-light: 0 4px 2px -2px rgba(0, 0, 0, .1);
 }
 
 body {

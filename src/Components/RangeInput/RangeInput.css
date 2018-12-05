@@ -15,7 +15,7 @@
 }
 
 .range-input__number:focus {
-  border-bottom-color: rgb(214, 91, 34);
+  border-bottom-color: var(--primary-color);
   outline: none;
 }
 
