@@ -56,12 +56,13 @@ export default class RangeInput extends Component {
           onBlur={this.onBlur}
           className="range-input__number"
           autoComplete="off"
-        />
+        />мм
         <input
           name={this.props.name}
           type="range"
           min={min}
           max={max}
+          step="10"
           value={this.props.value}
           onChange={this.changeValue}
           className="range-input__slider"
