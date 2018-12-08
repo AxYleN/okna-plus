@@ -18,6 +18,16 @@
   width: 100%;
 }
 
+.settings__input {
+  border: none;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.settings__input:focus {
+  border-bottom: 2px solid var(--primary-color);
+  outline: none;
+}
+
 .settings__info {
   width: 100%;
 }
@@ -35,7 +45,8 @@
   background-color: transparent;
 }
 
-.settings__add-to-chart:hover {
+.settings__add-to-chart:hover,
+.settings__add-to-chart:focus {
   color: white;
   outline: none;
   background-color: var(--primary-color);
