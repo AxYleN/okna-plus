@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 import './ConfigurationPage.css';
 import Blueprint from './Blueprint/Blueprint';
@@ -69,9 +68,6 @@ export default class ConfigurationPage extends Component {
     return (
       <div className="params-container">
         <h1>{item.name}</h1>
-        {/* <Link className="link" to="/">
-          &lt; Назад
-        </Link> */}
 
         <div className="params__row">
           <Blueprint params={this.state.params} type={item.type} />
