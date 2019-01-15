@@ -9,11 +9,11 @@ import img4 from './img/d1.jpg';
 
 export default function MainPage() {
   return (
-    <div className="main-container">
+    <main className="main-container">
       <Card img={img1} text="Окно" to="/w1" />
       <Card img={img2} text="Окно двухстворчатое" to="/w2" />
       <Card img={img3} text="Окно трёхстворчатое" to="/w3" />
       <Card img={img4} text="Дверь" to="/d" />
-    </div>
+    </main>
   );
 }

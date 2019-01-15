@@ -66,7 +66,7 @@ export default class ConfigurationPage extends Component {
     if (!item) return <div>Страница не найдена</div>;
 
     return (
-      <div className="params-container">
+      <main className="params-container">
         <h1>{item.name}</h1>
 
         <div className="params__row">
@@ -77,7 +77,7 @@ export default class ConfigurationPage extends Component {
             params={this.state.params}
           />
         </div>
-      </div>
+      </main>
     );
   }
 }

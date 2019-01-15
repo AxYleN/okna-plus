@@ -5,7 +5,7 @@ import './Navbar.css';
 
 export default function Navbar(props) {
   return (
-    <div className="navbar">
+    <nav className="navbar">
       <div className="navbar__container">
         
         <h2><Link to="/" className="navbar__header">Окна-Плюс</Link></h2>
@@ -21,6 +21,6 @@ export default function Navbar(props) {
           />
         </Switch>
       </div>
-    </div>
+    </nav>
   );
 }
