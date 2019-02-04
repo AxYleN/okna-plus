@@ -4,6 +4,7 @@ import './ConfigurationPage.css';
 import Blueprint from './Blueprint/Blueprint';
 import Params from './Params/Params';
 import items from './itemTypes';
+import Navbar from '../Navbar/Navbar';
 
 export default class ConfigurationPage extends Component {
   constructor(props) {
@@ -66,18 +67,21 @@ export default class ConfigurationPage extends Component {
     if (!item) return <div>Страница не найдена</div>;
 
     return (
-      <main className="params-container">
-        <h1>{item.name}</h1>
+      <>
+        <Navbar backLink="/" />
+        <main className="params-container">
+          <h1>{item.name}</h1>
 
-        <div className="params__row">
-          <Blueprint params={this.state.params} type={item.type} />
-          <Params
-            onChange={this.onChange}
-            onWindowChange={this.onWindowChange}
-            params={this.state.params}
-          />
-        </div>
-      </main>
+          <div className="params__row">
+            <Blueprint params={this.state.params} type={item.type} />
+            <Params
+              onChange={this.onChange}
+              onWindowChange={this.onWindowChange}
+              params={this.state.params}
+            />
+          </div>
+        </main>
+      </>
     );
   }
 }

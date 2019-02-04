@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import MainPage from './MainPage/MainPage';
 import ConfigurationPage from './ConfigurationPage/ConfigurationPage';
-import Navbar from './Navbar/Navbar';
 
 class App extends Component {
   render() {
@@ -11,7 +10,6 @@ class App extends Component {
       <div className="App">
         <BrowserRouter>
           <>
-            <Navbar />
             <Switch>
               <Route path="/:item" component={ConfigurationPage} />
               <Route path="/" component={MainPage} />
