@@ -6,9 +6,9 @@ export default function AdminPage(props) {
   const matchUrl = props.match.url;
 
   return (
-    <div>
-      <aside>Сайдбар</aside>
-      <main>
+    <div className="admin__container">
+      <aside className="admin__sidebar">Сайдбар</aside>
+      <main className="admin__main-container">
         <Switch>
           <Route path={matchUrl + '/price'} component={() => 'Цены'} />
           <Route path={matchUrl + '/orders'} component={() => 'Заказы'} />
