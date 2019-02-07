@@ -1,16 +1,26 @@
-.admin-nav{
-  margin-top: 200px;
+.admin-nav {
   display: flex;
   flex-direction: column;
+
+  margin-top: 200px;
 }
 
-.admin-nav__link{
-  color: #DDDDDD;
+.admin-nav__link {
   font-size: 18px;
+
   padding: 20px 30px;
+
   transition: .15s;
+
+  color: #ddd;
 }
 
-.admin-nav__link--active{
-  background-color: rgba(255, 255, 255, 0.2);
+.admin-nav__link:hover,
+.admin-nav__link:focus {
+  color: #fff;
+  outline: none;
+}
+
+.admin-nav__link--active {
+  background-color: rgba(255, 255, 255, .2);
 }

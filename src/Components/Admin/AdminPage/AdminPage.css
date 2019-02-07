@@ -5,14 +5,16 @@
 .admin__sidebar {
   position: absolute;
   z-index: 100;
-  height: 100%;
-  left: 0;
   top: 0;
+  left: 0;
+
   width: 300px;
-  background-color: #42474d;
+  height: 100%;
+
   color: #fff;
+  background-color: #42474d;
 }
 
-.admin__main-container{
+.admin__main-container {
   margin-left: 300px;
 }
