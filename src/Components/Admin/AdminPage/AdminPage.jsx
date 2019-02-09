@@ -3,6 +3,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import './AdminPage.css';
 
 import AdminNav from './AdminNav/AdminNav';
+import AdminProducts from './AdminProducts/AdminProducts';
 
 export default function AdminPage(props) {
   const matchUrl = props.match.url;
@@ -14,7 +15,7 @@ export default function AdminPage(props) {
       </aside>
       <main className="admin__main-container">
         <Switch>
-          <Route path={matchUrl + '/price'} component={() => 'Цены'} />
+          <Route path={matchUrl + '/products'} component={AdminProducts} />
           <Route path={matchUrl + '/orders'} component={() => 'Заказы'} />
           <Redirect to={matchUrl + '/orders'} />
         </Switch>
