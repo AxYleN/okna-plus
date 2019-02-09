@@ -1,23 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+import { ifNotNull, objToArr } from 'lib';
 
 import Card from './Card/Card';
 import './MainPage.css';
 import Navbar from '../Navbar/Navbar';
-import img1 from './img/1.jpg';
-import img2 from './img/2.png';
-import img3 from './img/3.png';
-import img4 from './img/d1.jpg';
 
-export default function MainPage() {
+function MainPage() {
+  const [products, setProducts] = useState(null);
+
+  useEffect(() => {
+    axios.get('/api/products').then(res => {
+      setProducts(res.data);
+    });
+  }, [true]);
+
+  const productCards = ifNotNull(products, products => {
+    return objToArr(products).map(p => (
+      <Card key={p.id} img={p.image} text={p.name} to={p.id} />
+    ));
+  });
+
   return (
     <>
       <Navbar />
-      <main className="main-container">
-        <Card img={img1} text="Окно" to="/w1" />
-        <Card img={img2} text="Окно двухстворчатое" to="/w2" />
-        <Card img={img3} text="Окно трёхстворчатое" to="/w3" />
-        <Card img={img4} text="Дверь" to="/d" />
-      </main>
+      <main className="main-container">{productCards}</main>
     </>
   );
 }
+
+export default MainPage;
