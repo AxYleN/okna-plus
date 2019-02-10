@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import { ifNotNull, objToArr } from 'lib';
+import { ifNotNull } from 'lib';
 
 import Card from './Card/Card';
 import './MainPage.css';
@@ -16,11 +16,16 @@ function MainPage() {
     });
   }, [true]);
 
-  const productCards = ifNotNull(products, products => {
-    return objToArr(products).map(p => (
-      <Card key={p.id} img={p.image} text={p.name} to={p.id} />
-    ));
-  });
+  const productCards = ifNotNull(products, products =>
+    products.map(p => (
+      <Card
+        key={p.product_key}
+        img={p.image}
+        text={p.name}
+        to={p.product_key}
+      />
+    )),
+  );
 
   return (
     <>
