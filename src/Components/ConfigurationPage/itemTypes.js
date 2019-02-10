@@ -20,7 +20,7 @@ export default {
     inputs: [{}],
     price: [{}],
   },
-  d: {
+  d1: {
     name: 'Дверь балконная',
     type: 'door',
     windowsCount: 0,

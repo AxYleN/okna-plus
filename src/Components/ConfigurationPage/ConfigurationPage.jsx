@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 import './ConfigurationPage.css';
 import Blueprint from './Blueprint/Blueprint';
@@ -10,7 +11,8 @@ export default class ConfigurationPage extends Component {
   constructor(props) {
     super(props);
 
-    this.item = items[this.props.match.params.item];
+    this.url = this.props.match.params.item;
+    this.item = items[this.url];
     const item = this.item;
 
     if (!item) {
@@ -58,13 +60,17 @@ export default class ConfigurationPage extends Component {
     this.setState({ params });
   };
 
-  componentDidMount() {
-    // Сделать запрос к серверу, получить данные о цене
+  async componentDidMount() {
+    const data = await axios.get(`/api/products/${this.url}`);
+    if (data.status !== 404) {
+      this.setState({ product: data.data });
+    }
   }
 
   render() {
     const item = this.item;
     if (!item) return <div>Страница не найдена</div>;
+    const fields = this.state.product ? this.state.product.fields : null;
 
     return (
       <>
@@ -78,6 +84,7 @@ export default class ConfigurationPage extends Component {
               onChange={this.onChange}
               onWindowChange={this.onWindowChange}
               params={this.state.params}
+              fields={fields}
             />
           </div>
         </main>
