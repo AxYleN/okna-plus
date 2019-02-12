@@ -37,6 +37,7 @@ export default class ConfigurationPage extends Component {
         fittings: 'maco',
         windows,
       },
+      type: undefined,
     };
   }
 
@@ -61,10 +62,19 @@ export default class ConfigurationPage extends Component {
   };
 
   async componentDidMount() {
-    const data = await axios.get(`/api/products/${this.url}`);
-    if (data.status !== 404) {
-      this.setState({ product: data.data });
-    }
+    axios
+      .get(`/api/products/${this.url}`)
+      .then(({ data }) => {
+        const product = data;
+        const fields = product.fields;
+        const type = fields.type;
+        delete fields.type;
+
+        this.setState({ type, product });
+      })
+      .catch(err => {
+        this.props.history.push('/');
+      });
   }
 
   render() {
@@ -79,7 +89,7 @@ export default class ConfigurationPage extends Component {
           <h1>{item.name}</h1>
 
           <div className="params__row">
-            <Blueprint params={this.state.params} type={item.type} />
+            <Blueprint params={this.state.params} type={this.state.type} />
             <Params
               onChange={this.onChange}
               onWindowChange={this.onWindowChange}
