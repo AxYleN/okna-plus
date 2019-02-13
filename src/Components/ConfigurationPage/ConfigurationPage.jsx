@@ -90,10 +90,37 @@ export default class ConfigurationPage extends Component {
         }
 
         this.setState({ type, product });
+        this.setDefaultParams(fields);
       })
       .catch(err => {
         this.props.history.push('/');
       });
+  }
+
+  setDefaultParams(fields) {
+    const params = {};
+
+    for (let key in fields) {
+      let param = fields[key];
+
+      if (param.type === 'select') {
+        const defVal = Object.keys(param.values)[0];
+
+        if (key !== 'window') {
+          params[key] = defVal;
+          continue;
+        }
+
+        params['windows'] = Array.from({ length: param.count }, () => ({
+          openTo: defVal,
+          mosquitoNet: false,
+        }));
+      } else if (param.type === 'range') {
+        params[key] = param.min;
+      }
+    }
+
+    this.setState({ params });
   }
 
   render() {
