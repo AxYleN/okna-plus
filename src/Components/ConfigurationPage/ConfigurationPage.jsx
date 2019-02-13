@@ -70,6 +70,25 @@ export default class ConfigurationPage extends Component {
         const type = fields.type;
         delete fields.type;
 
+        if (fields.window) {
+          const val = fields.window.values;
+          const newVal = {};
+          newVal['no'] = val.blank;
+          newVal['tilt'] = val.tilt;
+
+          newVal['toLeft'] = { ...val.turn };
+          newVal['toLeft'].text = 'Поворотное влево';
+          newVal['toRight'] = { ...val.turn };
+          newVal['toRight'].text = 'Поворотное вправо';
+
+          newVal['tilt_toLeft'] = { ...val.tiltAndTurn };
+          newVal['tilt_toLeft'].text = 'Поворотно-откидное влево';
+          newVal['tilt_toRight'] = { ...val.tiltAndTurn };
+          newVal['tilt_toRight'].text = 'Поворотно-откидное вправо';
+
+          fields.window.values = newVal;
+        }
+
         this.setState({ type, product });
       })
       .catch(err => {
