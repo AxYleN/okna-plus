@@ -1,10 +1,7 @@
-export default function(obj, keyName = 'id') {
+export default function(obj, cb = val => val) {
   const arr = [];
-  let currentObj = null;
   for (const key in obj) {
-    currentObj = obj[key];
-    currentObj[keyName] = key;
-    arr.push(currentObj);
+    arr.push(cb(obj[key], key));
   }
   return arr;
 }
