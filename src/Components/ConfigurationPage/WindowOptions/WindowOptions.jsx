@@ -1,38 +1,44 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import './WindowOptions.css';
+import SelectInput from '../../SelectInput';
 
-export default function WindowOptions(props) {
-  const value = props.value;
-
-  const onChange = function(e) {
-    const target = e.target;
+export default class WindowOptions extends Component {
+  onChange = ({ target }) => {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
-    props.onChange({ ...props.value, [name]: value });
+    const { value: oldValue, onChange } = this.props;
+    onChange({ ...oldValue, [name]: value });
   };
 
-  const mosquitoNet = (
+  mosquitoNet = () => (
     <label className="window-options__checkbox">
       Маскитная сетка:
-      <input type="checkbox" name="mosquitoNet" checked={value.mosquitoNet} onChange={onChange} />
+      <input
+        type="checkbox"
+        name="mosquitoNet"
+        value={this.props.value.mosquitoNet}
+        onChange={this.onChange}
+      />
     </label>
   );
 
-  return (
-    <label className="window-options">
-      <span className="window-options__caption">{props.caption}</span>
-      <select
-        name="openTo"
-        value={value.openTo}
-        className="settings__input window-options__select"
-        onChange={onChange}>
-        <option value="no">Глухое</option>
-        <option value="toLeft">Открывается влево</option>
-        <option value="toRight">Открывается вправо</option>
-      </select>
-      {value.openTo === 'no' ? '' : mosquitoNet}
-    </label>
-  );
+  render() {
+    const { value, label, options } = this.props;
+
+    return (
+      <label className="window-options">
+        <span className="window-options__caption">{label}</span>
+        <SelectInput
+          name="openTo"
+          options={options}
+          value={value.openTo}
+          className="settings__input window-options__select"
+          onChange={this.onChange}
+        />
+        {value.openTo === 'no' ? null : <this.mosquitoNet />}
+      </label>
+    );
+  }
 }

@@ -1,24 +1,15 @@
 import React from 'react';
 
 import './Params.css';
-import WindowOptions from '../WindowOptions/WindowOptions';
+import SelectInput from '../../SelectInput';
 import RangeInput from '../../RangeInput/RangeInput';
+import WindowOptions from '../WindowOptions/WindowOptions';
+import { objToArr } from 'lib';
 
 export default function Params(props) {
-  const { params, onChange } = props;
+  const inputs = generateInputs(props);
 
-  const windows = params.windows.map((window, id) => (
-    <WindowOptions
-      caption={`Окно ${id + 1}`}
-      value={window}
-      onChange={window => {
-        props.onWindowChange(window, id);
-      }}
-      key={id}
-    />
-  ));
-
-  const { width, height } = params;
+  const { width, height } = props.params;
   const area = (width * height) / 1000000; // Площадь в кв. метрах
   const pricePerSqrM = 4500;
   const price = pricePerSqrM * area;
@@ -26,55 +17,7 @@ export default function Params(props) {
   return (
     <div className="settings">
       <h2>Параметры</h2>
-      <label>
-        Профиль
-        <select
-          name="profile"
-          onChange={onChange}
-          value={params.profile}
-          className="settings__input">
-          <option value="exprof">Exprof</option>
-          <option value="proplex">Proplex</option>
-        </select>
-      </label>
-      <label>
-        Стеклопакет
-        <select
-          name="glass"
-          onChange={onChange}
-          value={params.glass}
-          className="settings__input">
-          <option value="4">4 &ndash; одно стекло</option>
-          <option value="24">24 &ndash; два стекла (однокамерный)</option>
-          <option value="32">32 &ndash; три стекла (двухкамерный)</option>
-          <option value="40">40 &ndash; три стекла (двухкамерный)</option>
-        </select>
-      </label>
-      <label>
-        Фурнитура
-        <select
-          name="fittings"
-          onChange={onChange}
-          value={params.fittings}
-          className="settings__input">
-          <option value="axor">Axor</option>
-          <option value="maco">Maco</option>
-        </select>
-      </label>
-      <RangeInput
-        caption="Высота:"
-        name="height"
-        onChange={onChange}
-        value={params.height}
-      />
-      <RangeInput
-        caption="Ширина:"
-        name="width"
-        onChange={onChange}
-        value={params.width}
-      />
-      {windows}
-
+      {inputs}
       <div className="settings__info">
         <p>
           <strong>Площадь:</strong> {area.toFixed(2)} м<sup>2</sup>
@@ -86,4 +29,97 @@ export default function Params(props) {
       </div>
     </div>
   );
+}
+
+function generateInputs(props) {
+  const { onChange, onWindowChange, params, fields } = props;
+
+  const inputs = [];
+
+  for (let key in fields) {
+    const field = fields[key];
+    const type = field.type;
+
+    const props = {
+      key,
+      field,
+      value: params[key],
+    };
+
+    if (type === 'range') {
+      inputs.push(getRangeInput(props, onChange));
+    } else if (type === 'select' && key === 'window') {
+      inputs.push(...getWindowInputs(props, onWindowChange));
+    } else if (type === 'select') {
+      inputs.push(getSelectInput(props, onChange));
+    }
+  }
+
+  return inputs;
+}
+
+function getRangeInput(props, onChange) {
+  const { key, field, value } = props;
+
+  const _props = {
+    name: key,
+    min: field.min,
+    max: field.max,
+    value,
+    onChange,
+  };
+
+  return (
+    <label key={key}>
+      {field.label}:
+      <RangeInput {..._props} />
+      мм
+    </label>
+  );
+}
+
+function getOptionsArray(values) {
+  return objToArr(values, (val, key) => ({
+    value: key,
+    text: val.text,
+  }));
+}
+
+function getSelectInput(props, onChange) {
+  const { key, field, value } = props;
+
+  const _props = {
+    name: key,
+    options: getOptionsArray(field.values),
+    value,
+    onChange,
+  };
+
+  return (
+    <label key={key}>
+      {field.label}
+      <SelectInput {..._props} className="settings__input" />
+    </label>
+  );
+}
+
+function getWindowInputs(props, onChange) {
+  const { key, field, value } = props;
+
+  const options = getOptionsArray(field.values);
+  const inputs = [];
+
+  for (let i = 0; i < field.count; i++) {
+    const _props = {
+      key: `${key}_${i}`,
+      label: `${field.label} ${i + 1}`,
+      options,
+      value: value[i],
+      onChange: window => onChange(window, i),
+    };
+
+    inputs.push(<WindowOptions {..._props} />);
+  }
+
+  return inputs;
 }

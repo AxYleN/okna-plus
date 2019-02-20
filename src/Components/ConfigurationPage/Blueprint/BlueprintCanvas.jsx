@@ -61,7 +61,7 @@ export default class BlueprintCanvas extends Component {
     this.ctx.save();
 
     const { x, y, width, height } = this.drawFrame();
-    const windows = this.props.params.windows;
+    const windows = this.props.params.window;
 
     if (this.props.type === 'door') {
       this.drawDoor({
@@ -69,10 +69,8 @@ export default class BlueprintCanvas extends Component {
         y,
         width,
         height,
-      })
-    }
-    
-    if (windows.length > 0) {
+      });
+    } else if (windows.length > 0) {
       const windowWidthPx = width / windows.length;
       const windowWidth = Math.round(this.props.params.width / windows.length);
 
@@ -244,7 +242,6 @@ export default class BlueprintCanvas extends Component {
     let topHeight = (height - padding) * 0.6;
     let bottomHeight = height - topHeight - padding;
 
-
     this.strokeRect(x, y, width, topHeight);
     this.strokeRect(x, y + topHeight + padding, width, bottomHeight);
 
@@ -252,9 +249,8 @@ export default class BlueprintCanvas extends Component {
     const knobW = padding / 3;
     const knobX = x - knobW * 2;
     const knobY = y + topHeight - knobH;
-    
-    this.strokeRect(knobX, knobY, knobW, knobH);
 
+    this.strokeRect(knobX, knobY, knobW, knobH);
   }
 
   componentDidUpdate() {
@@ -265,11 +261,7 @@ export default class BlueprintCanvas extends Component {
     const resolution = this.resolution;
 
     return (
-      <canvas
-        height={resolution}
-        width={resolution}
-        ref={this.canvasRef}
-      />
+      <canvas height={resolution} width={resolution} ref={this.canvasRef} />
     );
   }
 }

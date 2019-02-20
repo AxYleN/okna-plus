@@ -1,10 +1,8 @@
-.range-input__number {
+.range-input {
   font-size: 1rem;
 
   display: inline-block;
 
-  width: 5ch;
-  margin-left: .5rem;
   padding: 0;
 
   text-align: center;
@@ -14,14 +12,7 @@
   border-radius: 0;
 }
 
-.range-input__number:focus {
+.range-input:focus {
   border-bottom-color: var(--primary-color);
   outline: none;
-}
-
-.range-input__slider {
-  display: block;
-
-  width: 100%;
-  margin-top: .5rem;
 }

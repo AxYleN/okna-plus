@@ -4,66 +4,18 @@ import axios from 'axios';
 import './ConfigurationPage.css';
 import Blueprint from './Blueprint/Blueprint';
 import Params from './Params/Params';
-import items from './itemTypes';
 import Navbar from '../Navbar/Navbar';
 
-export default class ConfigurationPage extends Component {
-  constructor(props) {
-    super(props);
-
-    this.url = this.props.match.params.item;
-    this.item = items[this.url];
-    const item = this.item;
-
-    if (!item) {
-      this.props.history.push('/');
-      return;
-    }
-
-    const windows = [];
-    for (let i = 0; i < item.windowsCount; i++) {
-      windows.push({
-        openTo: 'no',
-        mosquitoNet: false,
-      });
-    }
-
-    this.state = {
-      params: {
-        width: 1400,
-        height: 1000,
-        profile: 'exprof',
-        glass: '24',
-        fittings: 'maco',
-        windows,
-      },
-      type: undefined,
-    };
-  }
-
-  onChange = e => {
-    const target = e.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-
-    const params = { ...this.state.params };
-    params[name] = value;
-
-    this.setState({ params });
+class ConfigurationPage extends Component {
+  state = {
+    params: null,
+    product: null,
+    type: null,
   };
 
-  onWindowChange = (window, id) => {
-    const params = { ...this.state.params };
-    const windows = [...params.windows];
-    windows[id] = window;
-    params.windows = windows;
-
-    this.setState({ params });
-  };
-
-  async componentDidMount() {
+  componentDidMount() {
     axios
-      .get(`/api/products/${this.url}`)
+      .get(`/api/products/${this.props.match.params.item}`)
       .then(({ data }) => {
         const product = data;
         const fields = product.fields;
@@ -89,57 +41,83 @@ export default class ConfigurationPage extends Component {
           fields.window.values = newVal;
         }
 
-        this.setState({ type, product });
-        this.setDefaultParams(fields);
+        const params = this.getDefaultParams(fields);
+        this.setState({ type, product, params }, () => console.log(this.state));
       })
       .catch(err => {
         this.props.history.push('/');
       });
   }
 
-  setDefaultParams(fields) {
-    const params = {};
+  getDefaultParams(fields) {
+    const values = {};
 
     for (let key in fields) {
-      let param = fields[key];
+      let field = fields[key];
 
-      if (param.type === 'select') {
-        const defVal = Object.keys(param.values)[0];
+      let defValue = this.getDefaultValue(fields[key]);
 
-        if (key !== 'window') {
-          params[key] = defVal;
-          continue;
-        }
-
-        params['windows'] = Array.from({ length: param.count }, () => ({
-          openTo: defVal,
+      if (key === 'window') {
+        defValue = Array.from({ length: field.count }, () => ({
+          openTo: defValue,
           mosquitoNet: false,
         }));
-      } else if (param.type === 'range') {
-        params[key] = param.min;
       }
+
+      values[key] = defValue;
     }
 
-    this.setState({ params });
+    return values;
   }
 
+  getDefaultValue(field) {
+    switch (field.type) {
+      case 'range':
+        return field.min;
+      case 'select':
+        return Object.keys(field.values)[0];
+      default:
+        return null;
+    }
+  }
+
+  onChange = e => {
+    const target = e.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    const params = { ...this.state.params };
+    params[name] = value;
+
+    this.setState({ params });
+  };
+
+  onWindowChange = (window, id) => {
+    const params = { ...this.state.params };
+    const windows = [...params.window];
+    windows[id] = window;
+    params.window = windows;
+
+    this.setState({ params });
+  };
+
   render() {
-    const item = this.item;
-    if (!item) return <div>Страница не найдена</div>;
-    const fields = this.state.product ? this.state.product.fields : null;
+    if (!this.state.product) return <Navbar backLink="/" />;
+    const { type, product, params } = this.state;
+    const { name, fields } = product;
 
     return (
       <>
         <Navbar backLink="/" />
         <main className="params-container">
-          <h1>{item.name}</h1>
+          <h1>{name}</h1>
 
           <div className="params__row">
-            <Blueprint params={this.state.params} type={this.state.type} />
+            <Blueprint params={this.state.params} type={type} />
             <Params
               onChange={this.onChange}
               onWindowChange={this.onWindowChange}
-              params={this.state.params}
+              params={params}
               fields={fields}
             />
           </div>
@@ -148,3 +126,5 @@ export default class ConfigurationPage extends Component {
     );
   }
 }
+
+export default ConfigurationPage;
