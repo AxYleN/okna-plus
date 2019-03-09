@@ -13,7 +13,7 @@ export default class RangeInput extends Component {
   };
 
   onChange = e => {
-    const value = parseInt(e.target.value);
+    const value = e.target.value;
     this.setState({ value });
   };
 
