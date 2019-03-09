@@ -9,10 +9,7 @@ import { objToArr } from 'lib';
 export default function Params(props) {
   const inputs = generateInputs(props);
 
-  const { width, height } = props.params;
-  const area = (width * height) / 1000000; // Площадь в кв. метрах
-  const pricePerSqrM = 4500;
-  const price = pricePerSqrM * area;
+  const { area, price } = props;
 
   return (
     <div className="settings">
