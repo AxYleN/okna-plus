@@ -6,12 +6,14 @@ import RangeInput from '../../../RangeInput/RangeInput';
 import Loading from '../../../Loading';
 
 import deepCopy from 'lib/deepCopy';
+import objDiff from 'lib/objDiff';
 
 export default class AdminProducts extends Component {
   state = {
     products: null,
     values: null,
     oldValues: null,
+    loading: true,
   };
 
   onChange = e => {
@@ -25,6 +27,8 @@ export default class AdminProducts extends Component {
     const values = deepCopy(this.state.values);
 
     path.reduce((el, key) => el[key], values)[name] = parseInt(value);
+
+    this.fixMinMax(values);
 
     this.setState({ values });
   };
@@ -46,7 +50,7 @@ export default class AdminProducts extends Component {
     const values = this.getValues(data);
     const oldValues = deepCopy(values);
 
-    this.setState({ products: data, values, oldValues }, () =>
+    this.setState({ products: data, values, oldValues, loading: false }, () =>
       console.log(this.state),
     );
   }
@@ -101,20 +105,65 @@ export default class AdminProducts extends Component {
     };
   }
 
-  saveValues() {
-    // Проверить изменились ли значения
-    // Проверить что min <= max
-    // Отправить запрос на сервер
+  fixMinMax = newValues => {
+    const { values } = this.state;
+    const changedValues = objDiff(values, newValues);
+
+    for (let key in changedValues) {
+      let product = changedValues[key];
+
+      if (!product.width && !product.height) continue;
+
+      if (product.width) {
+        this.validateMinMax(product.width, values[key].width);
+        newValues[key].width = product.width;
+      }
+      if (product.height) {
+        this.validateMinMax(product.height, values[key].height);
+        newValues[key].height = product.height;
+      }
+    }
+  };
+
+  validateMinMax(val, oldVal) {
+    if (val.min) {
+      val.max = Math.max(val.min, oldVal.max);
+      return;
+    }
+
+    if (val.max) {
+      val.min = Math.min(oldVal.min, val.max);
+      return;
+    }
   }
+
+  saveValues = () => {
+    const changedValues = objDiff(this.state.oldValues, this.state.values);
+    if (!changedValues) return;
+    this.setState({ loading: true });
+
+    const newValues = {};
+    for (let key in changedValues) {
+      newValues[key] = {};
+      newValues[key].fields = changedValues[key];
+    }
+
+    axios
+      .put(`/api/products`, newValues)
+      .then(({ data }) => {
+        this.setValues(data);
+      })
+      .catch(err => {
+        this.setState({ loading: false });
+      });
+  };
 
   render() {
     return (
       <div className="products">
         <h1 className="products__heading">Товары</h1>
 
-        <Loading
-          loaded={this.state.products !== null}
-          placeholder="Загрузка...">
+        <Loading loaded={!this.state.loading} placeholder="Загрузка...">
           <Products
             products={this.state.products}
             values={this.state.values}
@@ -179,14 +228,14 @@ function ProductsInputs({ group, values, onChange, name }) {
         name={`${name}-min`}
         value={values.min}
         onChange={onChange}
-        key="min"
+        key={`min-${values.min}`}
       />,
       <ProductsRangeInput
         label="Максимальная"
         name={`${name}-max`}
         value={values.max}
         onChange={onChange}
-        key="max"
+        key={`max-${values.max}`}
       />,
     ];
   }
