@@ -3,9 +3,14 @@ import React, { Component } from 'react';
 import './RangeInput.css';
 
 export default class RangeInput extends Component {
-  state = {
-    value: this.props.value || this.props.min,
-  };
+  constructor(props) {
+    super(props);
+
+    let value = props.value;
+    if (value === undefined) value = props.min || 0;
+
+    this.state = { value };
+  }
 
   changeValue = e => {
     this.onChange(e);
@@ -25,7 +30,8 @@ export default class RangeInput extends Component {
 
   onBlur = e => {
     const { min, max } = this.props;
-    let value = parseInt(e.target.value) || this.props.value;
+    let value = parseInt(e.target.value);
+    value = isNaN(value) ? this.props.value : value;
     e.target.value = value <= min ? min : value >= max ? max : value;
 
     this.changeValue(e);

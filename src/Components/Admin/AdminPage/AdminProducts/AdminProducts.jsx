@@ -126,12 +126,12 @@ export default class AdminProducts extends Component {
   };
 
   validateMinMax(val, oldVal) {
-    if (val.min) {
+    if (val.min !== undefined) {
       val.max = Math.max(val.min, oldVal.max);
       return;
     }
 
-    if (val.max) {
+    if (val.max !== undefined) {
       val.min = Math.min(oldVal.min, val.max);
       return;
     }
