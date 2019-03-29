@@ -227,6 +227,7 @@ function ProductsInputs({ group, values, onChange, name }) {
         label="Минимальная"
         name={`${name}-min`}
         value={values.min}
+        min={500}
         onChange={onChange}
         key={`min-${values.min}`}
       />,
@@ -234,6 +235,7 @@ function ProductsInputs({ group, values, onChange, name }) {
         label="Максимальная"
         name={`${name}-max`}
         value={values.max}
+        min={500}
         onChange={onChange}
         key={`max-${values.max}`}
       />,
@@ -268,7 +270,7 @@ function ProductsRangeInput({ label, ...rest }) {
   return (
     <label className="product-group__input">
       {label}
-      <RangeInput {...rest} />
+      <RangeInput min={1} {...rest} />
     </label>
   );
 }
