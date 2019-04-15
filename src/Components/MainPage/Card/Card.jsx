@@ -9,9 +9,7 @@ export default function Card(props) {
       <figure className="card__img-container">
         <img src={props.img} className="card__img" alt={props.text} />
       </figure>
-      <div className="card__info">
-        <div>{props.text}</div>&gt;
-      </div>
+      <div className="card__info">{props.text}</div>
     </Link>
   );
 }

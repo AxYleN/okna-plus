@@ -23,6 +23,9 @@
   --font-semibold: 600;
   --font-regular: 400;
 
+  --border-radius-md: .625rem;
+  --border-radius-sm: .3125rem;
+
   --shadow-light: 0 4px 2px -2px rgba(0, 0, 0, .1);
 }
 
