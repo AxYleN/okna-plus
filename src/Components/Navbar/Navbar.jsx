@@ -17,11 +17,11 @@ export default function Navbar(props) {
   return (
     <nav className="navbar">
       <div className="navbar__container">
-        <h2>
-          <Link to="/" className="navbar__header">
-            Окна-Плюс
+          <Link to="/">
+            <h2 className="navbar__header">
+                Окна-Плюс
+            </h2>
           </Link>
-        </h2>
         {backLink}
       </div>
     </nav>

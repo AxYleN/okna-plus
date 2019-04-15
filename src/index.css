@@ -5,10 +5,24 @@
 :root {
   --text-color: #2c3e50;
   --link-color: #bdc3c7;
-  --bg-color: #F9F9F9;
-  --border-color: #E1E1E1;
+  --bg-color: #f9f9f9;
+  --border-color: #e1e1e1;
   --primary-color: #2980b9;
-  
+
+  --color-hero: #3498db;
+  --color-primary: #34495e;
+  --color-secondary: #9aa4af;
+  --color-inverse: #fff;
+  --color-bg: #f8f8f8;
+
+  --font-size-lg: 1.5rem;
+  --font-size-md: 1.125rem;
+  --font-size-rg: 1rem;
+  --font-size-sm: .875rem;
+
+  --font-semibold: 600;
+  --font-regular: 400;
+
   --shadow-light: 0 4px 2px -2px rgba(0, 0, 0, .1);
 }
 
@@ -18,7 +32,8 @@ body {
   margin: 0;
   padding: 0;
 
-  color: var(--text-color);
+  color: var(--color-primary);
+  font-size: var(--font-size-rg);
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
