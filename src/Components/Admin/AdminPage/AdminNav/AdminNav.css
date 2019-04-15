@@ -2,25 +2,26 @@
   display: flex;
   flex-direction: column;
 
-  margin-top: 200px;
+  margin-top: 20vh;
 }
 
 .admin-nav__link {
-  font-size: 18px;
+  font-size: var(--font-size-md);
 
-  padding: 20px 30px;
+  padding: 1.25rem 2rem;
 
-  transition: .15s;
+  transition: color .15s ease-out;
 
-  color: #ddd;
+  color: inherit;
 }
 
 .admin-nav__link:hover,
 .admin-nav__link:focus {
-  color: #fff;
+  color: var(--color-inverse);
   outline: none;
 }
 
 .admin-nav__link--active {
+  color: var(--color-inverse);
   background-color: rgba(255, 255, 255, .2);
 }

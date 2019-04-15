@@ -4,17 +4,17 @@
 
 .admin__sidebar {
   position: fixed;
-  z-index: 100;
+  z-index: 10;
   top: 0;
   left: 0;
 
-  width: 300px;
+  width: 18.75rem;
   height: 100%;
 
-  color: #fff;
-  background-color: #42474d;
+  color: var(--color-secondary);
+  background-color: var(--color-primary);
 }
 
 .admin__main-container {
-  margin-left: 300px;
+  margin-left: 18.75rem;
 }
