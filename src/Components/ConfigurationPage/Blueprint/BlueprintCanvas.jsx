@@ -321,7 +321,12 @@ export default class BlueprintCanvas extends Component {
     const resolution = this.resolution;
 
     return (
-      <canvas height={resolution} width={resolution} ref={this.canvasRef} />
+      <canvas
+        height={resolution}
+        width={resolution}
+        ref={this.canvasRef}
+        style={{ maxWidth: '100%', maxHeight: '80vh' }}
+      />
     );
   }
 }
