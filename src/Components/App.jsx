@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import MainPage from './MainPage/MainPage';
 import ConfigurationPage from './ConfigurationPage/ConfigurationPage';
 import Admin from './Admin/Admin';
+import Cart from './Cart/Cart';
 
 class App extends Component {
   render() {
@@ -13,6 +14,7 @@ class App extends Component {
           <>
             <Switch>
               <Route path="/admin" component={Admin} />
+              <Route path="/cart" component={Cart} />
               <Route path="/:item" component={ConfigurationPage} />
               <Route path="/" component={MainPage} />
             </Switch>

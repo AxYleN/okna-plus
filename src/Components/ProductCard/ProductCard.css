@@ -1,0 +1,36 @@
+.product-card {
+  display: flex;
+
+  padding: 0 20px;
+}
+
+.product-card__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card__name {
+  font-size: var(--font-size-rg);
+  font-weight: var(--font-semibold);
+}
+
+.product-card__params {
+  font-size: var(--font-size-sm);
+
+  padding: 0 10px;
+
+  list-style: none;
+}
+
+.product-card__params strong {
+  font-weight: var(--font-semibold);
+}
+
+.product-card__final-info {
+  margin-top: auto;
+}
+
+.product-card__image {
+  max-width: 300px;
+  margin-left: auto;
+}
