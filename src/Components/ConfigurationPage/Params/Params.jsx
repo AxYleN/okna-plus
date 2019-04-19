@@ -13,7 +13,7 @@ export default function Params(props) {
 
   return (
     <div className="settings">
-      <h2>Параметры</h2>
+      <h2 className="subheading">Параметры</h2>
       {inputs}
       <div className="settings__info">
         <p>

@@ -184,7 +184,7 @@ class ConfigurationPage extends Component {
       <>
         <Navbar backLink="/" />
         <main className="params-container">
-          <h1>{name}</h1>
+          <h1 className="heading">{name}</h1>
 
           <div className="params__row">
             <Blueprint params={this.state.params} type={type} />

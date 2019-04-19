@@ -8,17 +8,6 @@
   margin: 8rem auto 2rem auto;
 }
 
-.params-container h1 {
-  font-size: 1.75rem;
-  font-weight: 400;
-
-  margin: .3rem 0;
-}
-
-.params-container h2 {
-  font-weight: 400;
-}
-
 .params-container .link {
   text-decoration: none;
 

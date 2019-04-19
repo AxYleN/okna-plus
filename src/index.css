@@ -28,3 +28,27 @@ input[type="number"]::-webkit-outer-spin-button {
 a {
   text-decoration: none;
 }
+
+.container {
+  width: 100%;
+  max-width: 68.75rem;
+  margin: 10rem auto 2rem auto;
+}
+
+.heading {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-regular);
+
+  margin: 0;
+
+  text-align: center;
+}
+
+.subheading {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-regular);
+
+  margin: 0 0 1rem 0;
+
+  text-align: center;
+}
