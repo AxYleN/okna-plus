@@ -14,7 +14,6 @@
 .navbar__container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
 
   max-width: 68.75rem;
   height: 100%;
@@ -41,4 +40,8 @@
   text-decoration: none;
 
   color: var(--link-color);
+}
+
+.navbar__link--back{
+  margin-left: auto;
 }

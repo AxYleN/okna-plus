@@ -6,20 +6,41 @@ import ConfigurationPage from './ConfigurationPage/ConfigurationPage';
 import Admin from './Admin/Admin';
 import Cart from './Cart/Cart';
 
+import cartContext from '../cartContext';
+
 class App extends Component {
+  state = {
+    cart: [],
+    editId: -1,
+  };
+
+  addToCart = product => {
+    this.setState({
+      cart: [...this.state.cart, product],
+      editId: -1,
+    });
+  };
+
   render() {
     return (
       <div className="App">
-        <BrowserRouter>
-          <>
-            <Switch>
-              <Route path="/admin" component={Admin} />
-              <Route path="/cart" component={Cart} />
-              <Route path="/:item" component={ConfigurationPage} />
-              <Route path="/" component={MainPage} />
-            </Switch>
-          </>
-        </BrowserRouter>
+        <cartContext.Provider value={this.state}>
+          <BrowserRouter>
+            <>
+              <Switch>
+                <Route path="/admin" component={Admin} />
+                <Route path="/cart" component={Cart} />
+                <Route
+                  path="/:item"
+                  render={props => (
+                    <ConfigurationPage {...props} addToCart={this.addToCart} />
+                  )}
+                />
+                <Route path="/" component={MainPage} />
+              </Switch>
+            </>
+          </BrowserRouter>
+        </cartContext.Provider>
       </div>
     );
   }

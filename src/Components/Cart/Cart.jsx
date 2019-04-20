@@ -1,85 +1,72 @@
-import React from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import Navbar from '../Navbar/Navbar';
 import ProductCard from '../ProductCard/ProductCard';
 
+import axios from 'axios';
+
+import cartContext from '../../cartContext';
+import arrayToObject from '../../lib/arrToObj';
+
 export default function Cart(props) {
-  const productExample = {
-    name: 'Окно двустворчатое',
-    cost: 6700,
-    count: 1,
-    type: 'window',
-    params: {
-      width: 1400,
-      height: 1100,
-      profile: 'Exporf',
-      window: [
-        {
-          openTo: 'no',
-          mosquitoNet: false,
-        },
-        {
-          openTo: 'tilt_toRight',
-          mosquitoNet: true,
-        },
-      ],
-    },
-    labels: {
-      width: 'Ширина',
-      height: 'Высота',
-      profile: 'Профиль',
-      window: {
-        label: 'Окно',
-        no: 'Глухое',
-        tilt: 'Откидное',
-        tilt_toLeft: 'Поворотно-откидное влево',
-        tilt_toRight: 'Поворотно-откидное вправо',
-        toLeft: 'Поворотное влево',
-        toRight: 'Поворотное вправо',
-      },
-    },
-  };
-  const productExample2 = {
-    name: 'Окно',
-    cost: 4700,
-    count: 2,
-    type: 'window',
-    params: {
-      width: 1100,
-      height: 1400,
-      profile: 'Exporf',
-      window: [
-        {
-          openTo: 'no',
-          mosquitoNet: false,
-        },
-      ],
-    },
-    labels: {
-      width: 'Ширина',
-      height: 'Высота',
-      profile: 'Профиль',
-      window: {
-        label: 'Окно',
-        no: 'Глухое',
-        tilt: 'Откидное',
-        tilt_toLeft: 'Поворотно-откидное влево',
-        tilt_toRight: 'Поворотно-откидное вправо',
-        toLeft: 'Поворотное влево',
-        toRight: 'Поворотное вправо',
-      },
-    },
-  };
+  const cart = useContext(cartContext);
+  const [products, setProducts] = useState(null);
+
+  const keys = [];
+  cart.cart.forEach(product => {
+    if (!keys.includes(product.key)) keys.push(product.key);
+  });
+
+  useEffect(() => {
+    axios.get('/api/products?extended=1').then(({ data }) => {
+      setProducts(arrayToObject(data, el => el.product_key));
+    });
+  }, keys);
+
+  function porductCards() {
+    return cart.cart.map((prod, id) => {
+      const product = products[prod.key];
+      const productParams = {
+        name: product.name,
+        count: prod.count,
+        cost: 1000,
+        type: product.fields.type,
+        params: {},
+      };
+      const fields = product.fields;
+
+      for (let key in prod.params) {
+        const value = prod.params[key];
+        const param = {
+          name: fields[key].label,
+          value: {
+            text:
+              fields[key].values && fields[key].values[value]
+                ? fields[key].values[value].text || value
+                : value,
+            value,
+          },
+        };
+        productParams.params[key] = param;
+      }
+
+      console.log(prod, product, productParams);
+
+      return (
+        <React.Fragment key={id}>
+          <hr/>
+          <ProductCard {...productParams} />
+        </React.Fragment>
+      );
+    });
+  }
 
   return (
     <>
       <Navbar backLink="/" />
       <main className="container">
-        <h1 className="heading">Корзина</h1>
-        <hr />
-        <ProductCard {...productExample} />
-        <hr />
-        <ProductCard {...productExample2} />
-        <hr />
+        <h1 className="heading">Корзина ({cart.cart.length})</h1>
+
+        {products ? porductCards() : 'Загрузка...'}
       </main>
     </>
   );

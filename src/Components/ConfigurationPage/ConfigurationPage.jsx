@@ -172,6 +172,14 @@ class ConfigurationPage extends Component {
     return (params.width * params.height) / 1000000;
   }
 
+  addToCart = () => {
+    this.props.addToCart({
+      params: this.state.params,
+      count: 1,
+      key: this.props.match.params.item,
+    });
+  };
+
   render() {
     if (!this.state.product) return <Navbar backLink="/" />;
     const { type, product, params } = this.state;
@@ -195,6 +203,7 @@ class ConfigurationPage extends Component {
               fields={fields}
               price={price}
               area={area}
+              addToCart={this.addToCart}
             />
           </div>
         </main>

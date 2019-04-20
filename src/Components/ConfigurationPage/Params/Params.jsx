@@ -9,7 +9,7 @@ import { objToArr } from 'lib';
 export default function Params(props) {
   const inputs = generateInputs(props);
 
-  const { area, price } = props;
+  const { area, price, addToCart } = props;
 
   return (
     <div className="settings">
@@ -22,7 +22,9 @@ export default function Params(props) {
         <p>
           <strong>Цена:</strong> {price.toFixed(2)}р.
         </p>
-        <button className="settings__add-to-chart">Добавить в корзину</button>
+        <button className="settings__add-to-chart" onClick={addToCart}>
+          Добавить в корзину
+        </button>
       </div>
     </div>
   );
