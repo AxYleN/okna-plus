@@ -10,7 +10,7 @@ export default function ProductCard(props) {
   paramsForCanvas.height = paramsForCanvas.height.value.value;
   paramsForCanvas.width = paramsForCanvas.width.value.value;
 
-  if (paramsForCanvas.window){
+  if (paramsForCanvas.window) {
     paramsForCanvas.window = paramsForCanvas.window.value.value;
   }
 

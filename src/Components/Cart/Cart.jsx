@@ -53,7 +53,7 @@ export default function Cart(props) {
 
       return (
         <React.Fragment key={id}>
-          <hr/>
+          <hr />
           <ProductCard {...productParams} />
         </React.Fragment>
       );
