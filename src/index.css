@@ -25,6 +25,11 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
 }
 
+input, button {
+  font: inherit;
+  color: inherit;
+}
+
 a {
   text-decoration: none;
 }
