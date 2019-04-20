@@ -29,6 +29,10 @@ a {
   text-decoration: none;
 }
 
+strong {
+  font-weight: var(--font-semibold);
+}
+
 .container {
   width: 100%;
   max-width: 68.75rem;

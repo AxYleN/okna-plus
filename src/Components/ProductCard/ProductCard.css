@@ -22,10 +22,6 @@
   list-style: none;
 }
 
-.product-card__params strong {
-  font-weight: var(--font-semibold);
-}
-
 .product-card__final-info {
   margin-top: auto;
 }
