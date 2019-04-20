@@ -17,12 +17,21 @@ export default function ProductCard(props) {
   return (
     <div className="product-card">
       <div className="product-card__info">
-        <h2 className="product-card__name">{name}</h2>
+        <div className="product-card__header">
+          <h2 className="product-card__name">{name}</h2>
+          <button className="product-card__button">Изменить</button>
+          <button className="product-card__button">Удалить</button>
+        </div>
         <ul className="product-card__params">
           <ParamsList params={params} />
         </ul>
         <div className="product-card__final-info">
-          Стоимость: {cost} Количество: {count}
+          <span>
+            <strong>Стоимость:</strong> {cost} руб.
+          </span>
+          <span className="final-info__count">
+            <strong>Количество:</strong> {count}
+          </span>
         </div>
       </div>
       <div className="product-card__image">
