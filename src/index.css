@@ -25,8 +25,10 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
 }
 
-input, button {
+input,
+button {
   font: inherit;
+
   color: inherit;
 }
 
@@ -60,4 +62,23 @@ strong {
   margin: 0 0 1rem 0;
 
   text-align: center;
+}
+
+.btn {
+  font-size: var(--font-size-rg);
+
+  padding: .75rem 2rem;
+
+  cursor: pointer;
+
+  color: var(--color-inverse);
+  border: 2px solid var(--color-primary);
+  border-radius: var(--border-radius-sm);
+  outline: none;
+  background-color: var(--color-primary);
+}
+
+.btn:hover,
+.btn:focus {
+  border-color: var(--color-hero);
 }

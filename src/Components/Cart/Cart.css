@@ -1,0 +1,9 @@
+.cart-footer {
+  display: flex;
+  align-items: baseline;
+  margin: 0 20px;
+}
+
+.cart-footer__cost {
+  margin-right: auto;
+}
