@@ -5,11 +5,12 @@ import './ConfigurationPage.css';
 import Blueprint from './Blueprint/Blueprint';
 import Params from './Params/Params';
 import PageLayout from '../PageLayout/PageLayout';
+import calcPrice from 'lib/calcPrice';
+import calcArea from 'lib/calcArea';
 
 class ConfigurationPage extends Component {
   state = {
     params: null,
-    prices: null,
     product: null,
     type: null,
   };
@@ -42,9 +43,10 @@ class ConfigurationPage extends Component {
           fields.window.values = newVal;
         }
 
+        this.getPrice = calcPrice(fields);
+        
         const params = this.getDefaultParams(fields);
-        const prices = this.getPriceList(fields);
-        this.setState({ type, product, params, prices }, () =>
+        this.setState({ type, product, params }, () =>
           console.log(this.state),
         );
       })
@@ -85,24 +87,6 @@ class ConfigurationPage extends Component {
     }
   }
 
-  getPriceList(fields) {
-    const prices = {};
-
-    for (let key in fields) {
-      const field = fields[key];
-      if (field.type === 'range') continue;
-
-      const values = {};
-      prices[key] = values;
-
-      for (let key in field.values) {
-        values[key] = field.values[key].price || 0;
-      }
-    }
-
-    return prices;
-  }
-
   onChange = e => {
     const target = e.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -123,55 +107,6 @@ class ConfigurationPage extends Component {
     this.setState({ params });
   };
 
-  getCurrentPrices() {
-    const { params, prices } = this.state;
-    const cPrices = {};
-
-    for (let key in params) {
-      let price = prices[key];
-      if (!price) continue;
-
-      if (!Array.isArray(params[key])) {
-        cPrices[key] = price[params[key]];
-        continue;
-      }
-
-      cPrices[key] = params[key].reduce((acc, window) => {
-        let val = price[window.openTo];
-
-        if (window.mosquitoNet) {
-          val += this.state.product.fields.window.mosquitoNet;
-        }
-
-        return acc + val;
-      }, 0);
-    }
-
-    return cPrices;
-  }
-
-  getPrice() {
-    const prices = this.getCurrentPrices();
-
-    const area = this.getArea();
-    const costPerSqrM = prices.profile + prices.glass;
-    delete prices.profile;
-    delete prices.glass;
-
-    let price = costPerSqrM * area;
-
-    for (let key in prices) {
-      price += prices[key];
-    }
-
-    return price;
-  }
-
-  getArea() {
-    const params = this.state.params;
-    return (params.width * params.height) / 1000000;
-  }
-
   addToCart = () => {
     this.props.addToCart({
       params: this.state.params,
@@ -185,8 +120,8 @@ class ConfigurationPage extends Component {
     const { type, product, params } = this.state;
     const { name, fields } = product;
 
-    let price = this.getPrice();
-    let area = this.getArea();
+    const price = this.getPrice ? this.getPrice(params) : 0;
+    const area = calcArea(params);
 
     return (
       <PageLayout>
