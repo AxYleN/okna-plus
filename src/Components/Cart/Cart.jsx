@@ -7,7 +7,7 @@ import './Cart.css';
 import axios from 'axios';
 
 import cartContext from '../../cartContext';
-import { arrToObj as arrayToObject } from 'lib';
+import { arrToObj as arrayToObject, calcArea, calcPrice, deepCopy } from 'lib';
 
 export default function Cart(props) {
   const cart = useContext(cartContext);
@@ -20,9 +20,33 @@ export default function Cart(props) {
 
   useEffect(() => {
     axios.get('/api/products?extended=1').then(({ data }) => {
+      data.forEach(product => {
+        const fields = product.fields;
+        if (fields.window) {
+          const val = fields.window.values;
+          const newVal = {};
+          newVal['no'] = val.blank;
+          newVal['tilt'] = val.tilt;
+
+          newVal['toLeft'] = { ...val.turn };
+          newVal['toLeft'].text = 'Поворотное влево';
+          newVal['toRight'] = { ...val.turn };
+          newVal['toRight'].text = 'Поворотное вправо';
+
+          newVal['tilt_toLeft'] = { ...val.tiltAndTurn };
+          newVal['tilt_toLeft'].text = 'Поворотно-откидное влево';
+          newVal['tilt_toRight'] = { ...val.tiltAndTurn };
+          newVal['tilt_toRight'].text = 'Поворотно-откидное вправо';
+
+          fields.window.values = newVal;
+        }
+      });
+
       setProducts(arrayToObject(data, el => el.product_key));
     });
   }, keys);
+
+  let sum = 0;
 
   function porductCards() {
     return cart.cart.map((prod, id) => {
@@ -30,11 +54,15 @@ export default function Cart(props) {
       const productParams = {
         name: product.name,
         count: prod.count,
-        cost: 1000,
         type: product.fields.type,
         params: {},
       };
       const fields = product.fields;
+
+      const cost = +calcPrice(fields)(prod.params).toFixed(2);
+
+      productParams.cost = cost;
+      sum += cost * productParams.count;
 
       for (let key in prod.params) {
         const value = prod.params[key];
@@ -51,7 +79,14 @@ export default function Cart(props) {
         productParams.params[key] = param;
       }
 
-      console.log(prod, product, productParams);
+      const area = calcArea(prod.params);
+      productParams.params.area = {
+        name: 'Площадь',
+        value: {
+          text: area,
+          value: area,
+        },
+      };
 
       return (
         <React.Fragment key={id}>
@@ -62,6 +97,14 @@ export default function Cart(props) {
     });
   }
 
+  if (cart.cart.length === 0)
+    return (
+      <PageLayout>
+        <h1 className="heading">Корзина (пусто)</h1>
+        Вы не выбрали ни одного товара.
+      </PageLayout>
+    );
+
   return (
     <PageLayout>
       <h1 className="heading">Корзина ({cart.cart.length})</h1>
@@ -70,7 +113,7 @@ export default function Cart(props) {
       <hr />
       <div className="cart-footer">
         <div className="cart-footer__cost">
-          <strong>Итого:</strong> 13400 руб.
+          <strong>Итого:</strong> {sum} руб.
         </div>
         <button className="btn">Оформить заказ</button>
       </div>

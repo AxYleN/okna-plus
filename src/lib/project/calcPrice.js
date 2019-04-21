@@ -35,7 +35,7 @@ function getCurrentPrices(fields, params) {
       let val = price[window.openTo];
 
       if (window.mosquitoNet) {
-        val += this.state.product.fields.window.mosquitoNet;
+        val += fields.window.mosquitoNet;
       }
 
       return acc + val;
