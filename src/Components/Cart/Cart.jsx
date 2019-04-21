@@ -7,7 +7,7 @@ import './Cart.css';
 import axios from 'axios';
 
 import cartContext from '../../cartContext';
-import arrayToObject from '../../lib/arrToObj';
+import { arrToObj as arrayToObject } from 'lib';
 
 export default function Cart(props) {
   const cart = useContext(cartContext);

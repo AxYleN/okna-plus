@@ -5,8 +5,7 @@ import './AdminProducts.css';
 import RangeInput from '../../../RangeInput/RangeInput';
 import Loading from '../../../Loading';
 
-import deepCopy from 'lib/deepCopy';
-import objDiff from 'lib/objDiff';
+import { deepCopy, objDiff } from 'lib';
 
 export default class AdminProducts extends Component {
   state = {

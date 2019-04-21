@@ -5,8 +5,7 @@ import './ConfigurationPage.css';
 import Blueprint from './Blueprint/Blueprint';
 import Params from './Params/Params';
 import PageLayout from '../PageLayout/PageLayout';
-import calcPrice from 'lib/calcPrice';
-import calcArea from 'lib/calcArea';
+import { calcPrice, calcArea } from 'lib';
 
 class ConfigurationPage extends Component {
   state = {
@@ -44,11 +43,9 @@ class ConfigurationPage extends Component {
         }
 
         this.getPrice = calcPrice(fields);
-        
+
         const params = this.getDefaultParams(fields);
-        this.setState({ type, product, params }, () =>
-          console.log(this.state),
-        );
+        this.setState({ type, product, params }, () => console.log(this.state));
       })
       .catch(err => {
         this.props.history.push('/');
