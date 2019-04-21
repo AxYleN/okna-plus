@@ -1,7 +1,7 @@
 .cart-footer {
   display: flex;
   align-items: baseline;
-  margin: 0 20px;
+  margin: 2rem 20px;
 }
 
 .cart-footer__cost {

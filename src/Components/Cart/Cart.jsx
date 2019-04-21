@@ -7,9 +7,9 @@ import './Cart.css';
 import axios from 'axios';
 
 import cartContext from '../../cartContext';
-import { arrToObj as arrayToObject, calcArea, calcPrice, deepCopy } from 'lib';
+import { arrToObj as arrayToObject, calcArea, calcPrice } from 'lib';
 
-export default function Cart(props) {
+export default function Cart() {
   const cart = useContext(cartContext);
   const [products, setProducts] = useState(null);
 
