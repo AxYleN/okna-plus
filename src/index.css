@@ -2,8 +2,23 @@
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: "OpenSans";
+  font-weight: 400;
+
+  font-display: swap;
+  src: url(/fonts/OpenSans-Regular.ttf) format("truetype");
+}
+@font-face {
+  font-family: "OpenSans";
+  font-weight: 600;
+
+  font-display: swap;
+  src: url(/fonts/OpenSans-SemiBold.ttf) format("truetype");
+}
+
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: "OpenSans", sans-serif;
   font-size: var(--font-size-rg);
 
   margin: 0;
