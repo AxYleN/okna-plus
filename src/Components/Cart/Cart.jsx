@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react';
-import Navbar from '../Navbar/Navbar';
+import PageLayout from '../PageLayout/PageLayout';
 import ProductCard from '../ProductCard/ProductCard';
 
 import './Cart.css';
@@ -63,20 +63,17 @@ export default function Cart(props) {
   }
 
   return (
-    <>
-      <Navbar backLink="/" />
-      <main className="container">
-        <h1 className="heading">Корзина ({cart.cart.length})</h1>
+    <PageLayout>
+      <h1 className="heading">Корзина ({cart.cart.length})</h1>
 
-        {products ? porductCards() : 'Загрузка...'}
-        <hr />
-        <div className="cart-footer">
-          <div className="cart-footer__cost">
-            <strong>Итого:</strong> 13400 руб.
-          </div>
-          <button className="btn">Оформить заказ</button>
+      {products ? porductCards() : 'Загрузка...'}
+      <hr />
+      <div className="cart-footer">
+        <div className="cart-footer__cost">
+          <strong>Итого:</strong> 13400 руб.
         </div>
-      </main>
-    </>
+        <button className="btn">Оформить заказ</button>
+      </div>
+    </PageLayout>
   );
 }

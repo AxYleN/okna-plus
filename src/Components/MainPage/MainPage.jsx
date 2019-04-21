@@ -5,7 +5,7 @@ import { ifNotNull } from 'lib';
 
 import Card from './Card/Card';
 import './MainPage.css';
-import Navbar from '../Navbar/Navbar';
+import PageLayout from '../PageLayout/PageLayout';
 
 function MainPage() {
   const [products, setProducts] = useState(null);
@@ -28,10 +28,9 @@ function MainPage() {
   );
 
   return (
-    <>
-      <Navbar />
+    <PageLayout backLink={null}>
       <main className="main-container">{productCards}</main>
-    </>
+    </PageLayout>
   );
 }
 

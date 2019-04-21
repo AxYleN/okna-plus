@@ -3,7 +3,6 @@
   flex-wrap: wrap;
   justify-content: center;
 
-  width: 100%;
-  max-width: 720px;
-  margin: 8rem auto 2rem auto;
+  max-width: 45rem;
+  margin: auto;
 }

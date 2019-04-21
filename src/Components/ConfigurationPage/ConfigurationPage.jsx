@@ -4,7 +4,7 @@ import axios from 'axios';
 import './ConfigurationPage.css';
 import Blueprint from './Blueprint/Blueprint';
 import Params from './Params/Params';
-import Navbar from '../Navbar/Navbar';
+import PageLayout from '../PageLayout/PageLayout';
 
 class ConfigurationPage extends Component {
   state = {
@@ -181,7 +181,7 @@ class ConfigurationPage extends Component {
   };
 
   render() {
-    if (!this.state.product) return <Navbar backLink="/" />;
+    if (!this.state.product) return <PageLayout>Загрузка...</PageLayout>;
     const { type, product, params } = this.state;
     const { name, fields } = product;
 
@@ -189,9 +189,8 @@ class ConfigurationPage extends Component {
     let area = this.getArea();
 
     return (
-      <>
-        <Navbar backLink="/" />
-        <main className="params-container">
+      <PageLayout>
+        <div className="params-container">
           <h1 className="heading">{name}</h1>
 
           <div className="params__row">
@@ -206,8 +205,8 @@ class ConfigurationPage extends Component {
               addToCart={this.addToCart}
             />
           </div>
-        </main>
-      </>
+        </div>
+      </PageLayout>
     );
   }
 }
