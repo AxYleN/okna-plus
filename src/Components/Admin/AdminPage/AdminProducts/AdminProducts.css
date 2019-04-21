@@ -16,12 +16,6 @@
   text-align: center;
 }
 
-.products hr {
-  width: 100%;
-
-  border: 1px solid hsl(0, 0%, 95%);
-}
-
 .products__save {
   font: inherit;
 
