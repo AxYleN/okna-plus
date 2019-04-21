@@ -5,7 +5,7 @@ function Point(x, y) {
 }
 
 export default class BlueprintCanvas extends Component {
-  resolution = 1000;
+  resolution = this.props.resolution || 1200;
   center = this.resolution / 2;
   padding = this.resolution / 10;
 
@@ -265,8 +265,8 @@ export default class BlueprintCanvas extends Component {
     const ctx = this.ctx;
     const { x1, y1, x2, y2 } = this.frame;
 
-    let padding = 30;
-    const textPadding = 10;
+    let padding = this.resolution / 30;
+    const textPadding = this.resolution / 100;
 
     if (position === 'bottom') padding = -padding;
     let X = position === 'right' ? x2 : x1;

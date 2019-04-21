@@ -35,7 +35,7 @@ export default function ProductCard(props) {
         </div>
       </div>
       <div className="product-card__image">
-        <BlueprintCanvas params={paramsForCanvas} type={type} />
+        <BlueprintCanvas params={paramsForCanvas} type={type} resolution="600" />
       </div>
     </div>
   );
