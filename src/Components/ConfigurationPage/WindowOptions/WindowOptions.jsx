@@ -14,7 +14,7 @@ export default class WindowOptions extends Component {
 
   mosquitoNet = () => (
     <label className="window-options__checkbox">
-      Маскитная сетка:
+      Москитная сетка:
       <input
         type="checkbox"
         name="mosquitoNet"
