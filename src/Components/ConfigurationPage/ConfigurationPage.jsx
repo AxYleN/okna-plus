@@ -20,8 +20,7 @@ class ConfigurationPage extends Component {
       .then(({ data }) => {
         const product = data;
         const fields = product.fields;
-        const type = fields.type;
-        delete fields.type;
+        const type = data.type;
 
         if (fields.window) {
           const val = fields.window.values;

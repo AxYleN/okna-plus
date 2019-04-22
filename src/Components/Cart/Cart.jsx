@@ -54,7 +54,7 @@ export default function Cart() {
       const productParams = {
         name: product.name,
         count: prod.count,
-        type: product.fields.type,
+        type: product.type,
         params: {},
       };
       const fields = product.fields;
