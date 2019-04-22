@@ -1,8 +1,6 @@
 .card {
-  overflow: hidden;
-
   width: 45%;
-  min-width: 300px;
+  min-width: 18.75rem;
   margin: 1rem;
 
   text-decoration: none;

@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 
 import './Card.css';
 
-export default function Card(props) {
+export default function Card({ to, img, text }) {
   return (
-    <Link className="card" to={props.to}>
+    <Link className="card" to={to}>
       <figure className="card__img-container">
-        <img src={props.img} className="card__img" alt={props.text} />
+        <img src={img} className="card__img" alt={text} />
       </figure>
-      <div className="card__info">{props.text}</div>
+      <div className="card__info">{text}</div>
     </Link>
   );
 }
