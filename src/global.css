@@ -1,0 +1,36 @@
+.heading {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-regular);
+
+  margin: 0;
+
+  text-align: center;
+}
+
+.subheading {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-regular);
+
+  margin: 0 0 1rem 0;
+
+  text-align: center;
+}
+
+.btn {
+  font-size: var(--font-size-rg);
+
+  padding: .75rem 2rem;
+
+  cursor: pointer;
+
+  color: var(--color-inverse);
+  border: 2px solid var(--color-primary);
+  border-radius: var(--border-radius-sm);
+  outline: none;
+  background-color: var(--color-primary);
+}
+
+.btn:hover,
+.btn:focus {
+  border-color: var(--color-hero);
+}
