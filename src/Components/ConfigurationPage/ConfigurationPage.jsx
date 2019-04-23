@@ -121,10 +121,10 @@ class ConfigurationPage extends Component {
 
     return (
       <PageLayout>
-        <div className="params-container">
+        <div>
           <h1 className="heading">{name}</h1>
 
-          <div className="params__row">
+          <div className="params-container">
             <Blueprint params={this.state.params} type={type} />
             <Params
               onChange={this.onChange}

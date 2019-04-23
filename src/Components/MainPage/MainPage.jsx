@@ -14,17 +14,10 @@ function MainPage() {
     axios.get('/api/products').then(res => {
       setProducts(res.data);
     });
-  }, [true]);
+  }, []);
 
   const productCards = ifNotNull(products, products =>
-    products.map(p => (
-      <Card
-        key={p.product_key}
-        img={p.image}
-        text={p.name}
-        to={p.product_key}
-      />
-    )),
+    products.map(p => <Card key={p.product_key} img={p.image} text={p.name} to={p.product_key} />),
   );
 
   return (

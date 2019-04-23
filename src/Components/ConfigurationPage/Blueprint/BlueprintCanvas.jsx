@@ -112,9 +112,7 @@ export default class BlueprintCanvas extends Component {
     const { center, padding } = this;
 
     const { width, height } = this.props.params;
-    const [nWidth, nHeight] = this.normalize(width, height).map(
-      num => num - padding,
-    );
+    const [nWidth, nHeight] = this.normalize(width, height).map(num => num - padding);
 
     const halfWidth = nWidth / 2;
     const halfHeight = nHeight / 2;
@@ -184,8 +182,7 @@ export default class BlueprintCanvas extends Component {
     const [winPadding] = this.normalize(openTo === 'no' ? 30 : 60);
 
     this.ctx.save();
-    this.ctx.fillStyle =
-      openTo !== 'no' && mosquitoNet ? this.colors.mid : this.colors.light;
+    this.ctx.fillStyle = openTo !== 'no' && mosquitoNet ? this.colors.mid : this.colors.light;
     const glassSize = this.drawGlass(widthPx, shift, winPadding);
     this.ctx.restore();
 

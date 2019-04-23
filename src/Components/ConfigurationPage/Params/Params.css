@@ -3,8 +3,8 @@
   align-items: center;
   flex-direction: column;
 
-  width: 40%;
-  min-width: 300px;
+  width: 21.875rem;
+  max-width: 100%;
 }
 
 .settings > *:nth-child(n + 3) {

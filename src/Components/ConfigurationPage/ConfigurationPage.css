@@ -1,17 +1,5 @@
 .params-container {
   display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-
-.params-container .link {
-  text-decoration: none;
-
-  color: var(--link-color);
-}
-
-.params-container .params__row {
-  display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 
