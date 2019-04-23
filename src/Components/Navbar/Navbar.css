@@ -26,8 +26,6 @@
   font-weight: var(--font-semibold);
 
   text-transform: uppercase;
-
-  color: var(--color-inverse);
 }
 
 .navbar__link {
@@ -39,7 +37,7 @@
 
   text-decoration: none;
 
-  color: var(--link-color);
+  color: var(--color-secondary);
 }
 
 .navbar__link--back {

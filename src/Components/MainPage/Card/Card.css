@@ -5,7 +5,6 @@
 
   text-decoration: none;
 
-  color: inherit;
   border-radius: var(--border-radius-md);
   background-color: var(--color-bg);
 }
