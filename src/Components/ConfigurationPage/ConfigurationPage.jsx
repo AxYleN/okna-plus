@@ -5,7 +5,7 @@ import './ConfigurationPage.css';
 import Blueprint from './Blueprint/Blueprint';
 import Params from './Params/Params';
 import PageLayout from '../PageLayout/PageLayout';
-import { calcPrice, calcArea } from 'lib';
+import { calcPrice, calcArea, getOpenToValues } from 'lib';
 
 class ConfigurationPage extends Component {
   state = {
@@ -17,33 +17,16 @@ class ConfigurationPage extends Component {
   componentDidMount() {
     axios
       .get(`/api/products/${this.props.match.params.item}`)
-      .then(({ data }) => {
-        const product = data;
-        const fields = product.fields;
-        const type = data.type;
+      .then(({ data: product }) => {
+        const { fields, type } = product;
 
         if (fields.window) {
-          const val = fields.window.values;
-          const newVal = {};
-          newVal['no'] = val.blank;
-          newVal['tilt'] = val.tilt;
-
-          newVal['toLeft'] = { ...val.turn };
-          newVal['toLeft'].text = 'Поворотное влево';
-          newVal['toRight'] = { ...val.turn };
-          newVal['toRight'].text = 'Поворотное вправо';
-
-          newVal['tilt_toLeft'] = { ...val.tiltAndTurn };
-          newVal['tilt_toLeft'].text = 'Поворотно-откидное влево';
-          newVal['tilt_toRight'] = { ...val.tiltAndTurn };
-          newVal['tilt_toRight'].text = 'Поворотно-откидное вправо';
-
-          fields.window.values = newVal;
+          fields.window.values = getOpenToValues(fields.window.values);
         }
 
         this.getPrice = calcPrice(fields);
-
         const params = this.getDefaultParams(fields);
+
         this.setState({ type, product, params }, () => console.log(this.state));
       })
       .catch(err => {
@@ -55,18 +38,7 @@ class ConfigurationPage extends Component {
     const values = {};
 
     for (let key in fields) {
-      let field = fields[key];
-
-      let defValue = this.getDefaultValue(fields[key]);
-
-      if (key === 'window') {
-        defValue = Array.from({ length: field.count }, () => ({
-          openTo: defValue,
-          mosquitoNet: false,
-        }));
-      }
-
-      values[key] = defValue;
+      values[key] = this.getDefaultValue(fields[key]);
     }
 
     return values;
@@ -77,8 +49,12 @@ class ConfigurationPage extends Component {
       case 'range':
         return field.min;
       case 'select':
-      case 'select-window':
         return Object.keys(field.values)[0];
+      case 'select-window':
+        return Array.from({ length: field.count }, () => ({
+          openTo: Object.keys(field.values)[0],
+          mosquitoNet: false,
+        }));
       default:
         return null;
     }
@@ -114,10 +90,11 @@ class ConfigurationPage extends Component {
 
   render() {
     if (!this.state.product) return <PageLayout>Загрузка...</PageLayout>;
+
     const { type, product, params } = this.state;
     const { name, fields } = product;
 
-    const price = this.getPrice ? this.getPrice(params) : 0;
+    const price = this.getPrice(params);
     const area = calcArea(params);
 
     return (

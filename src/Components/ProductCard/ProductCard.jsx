@@ -1,18 +1,10 @@
 import React from 'react';
 import './ProductCard.css';
 import BlueprintCanvas from '../ConfigurationPage/Blueprint/BlueprintCanvas';
-import { deepCopy } from 'lib';
 
 export default function ProductCard(props) {
-  const { name, cost, params, count, type } = props;
-  const paramsForCanvas = deepCopy(props.params);
-
-  paramsForCanvas.height = paramsForCanvas.height.value.value;
-  paramsForCanvas.width = paramsForCanvas.width.value.value;
-
-  if (paramsForCanvas.window) {
-    paramsForCanvas.window = paramsForCanvas.window.value.value;
-  }
+  const { name, type, params, count, cost, area } = props;
+  const paramsForCanvas = getValues(params);
 
   return (
     <div className="product-card">
@@ -24,6 +16,9 @@ export default function ProductCard(props) {
         </div>
         <ul className="product-card__params">
           <ParamsList params={params} />
+          <li>
+            <strong>Площадь:</strong> {area} м<sup>2</sup>
+          </li>
         </ul>
         <div className="product-card__final-info">
           <span>
@@ -35,37 +30,42 @@ export default function ProductCard(props) {
         </div>
       </div>
       <div className="product-card__image">
-        <BlueprintCanvas
-          params={paramsForCanvas}
-          type={type}
-          resolution="600"
-        />
+        <BlueprintCanvas params={paramsForCanvas} type={type} resolution="600" />
       </div>
     </div>
   );
+}
+
+function getValues(params) {
+  const values = {};
+
+  for (let key in params) {
+    values[key] = params[key].value.value;
+  }
+
+  return values;
 }
 
 function ParamsList({ params }) {
   const items = [];
 
   for (let key in params) {
-    const param = params[key];
+    const { name, value } = params[key];
 
-    if (!Array.isArray(param.value.value)) {
+    if (!Array.isArray(value.text)) {
       items.push(
         <li key={key}>
-          <strong>{param.name}:</strong> {param.value.text}
+          <strong>{name}:</strong> {value.text}
         </li>,
       );
       continue;
     }
 
     items.push(
-      param.value.value.map((el, id) => {
+      value.text.map((text, id) => {
         return (
           <li key={key + id}>
-            <strong>{`${param.name} ${id + 1}`}:</strong> {el.openTo},{' '}
-            {el.mosquitoNet ? 'с москитной сеткой' : 'без москитной сетки'}
+            <strong>{`${name} ${id + 1}`}:</strong> {text}
           </li>
         );
       }),

@@ -7,14 +7,21 @@ import './Cart.css';
 import axios from 'axios';
 
 import cartContext from 'lib/cartContext';
-import { arrToObj as arrayToObject, calcArea, calcPrice } from 'lib';
+import {
+  arrToObj as arrayToObject,
+  calcArea,
+  calcPrice,
+  deepCopy,
+  getOpenToValues,
+  getOpenToText,
+} from 'lib';
 
 export default function Cart() {
-  const cart = useContext(cartContext);
+  const { cart } = useContext(cartContext);
   const [products, setProducts] = useState(null);
 
   const keys = [];
-  cart.cart.forEach(product => {
+  cart.forEach(product => {
     if (!keys.includes(product.key)) keys.push(product.key);
   });
 
@@ -23,22 +30,7 @@ export default function Cart() {
       data.forEach(product => {
         const fields = product.fields;
         if (fields.window) {
-          const val = fields.window.values;
-          const newVal = {};
-          newVal['no'] = val.blank;
-          newVal['tilt'] = val.tilt;
-
-          newVal['toLeft'] = { ...val.turn };
-          newVal['toLeft'].text = 'Поворотное влево';
-          newVal['toRight'] = { ...val.turn };
-          newVal['toRight'].text = 'Поворотное вправо';
-
-          newVal['tilt_toLeft'] = { ...val.tiltAndTurn };
-          newVal['tilt_toLeft'].text = 'Поворотно-откидное влево';
-          newVal['tilt_toRight'] = { ...val.tiltAndTurn };
-          newVal['tilt_toRight'].text = 'Поворотно-откидное вправо';
-
-          fields.window.values = newVal;
+          fields.window.values = getOpenToValues(fields.window.values);
         }
       });
 
@@ -49,44 +41,26 @@ export default function Cart() {
   let sum = 0;
 
   function porductCards() {
-    return cart.cart.map((prod, id) => {
-      const product = products[prod.key];
+    return cart.map((currentProduct, id) => {
+      const { params, count } = currentProduct;
+      const product = products[currentProduct.key];
+
+      const fields = product.fields;
+      const cost = +calcPrice(fields)(params).toFixed(2);
+      sum += cost * count;
+
       const productParams = {
         name: product.name,
-        count: prod.count,
         type: product.type,
+        area: calcArea(params),
         params: {},
+        count,
+        cost,
       };
-      const fields = product.fields;
 
-      const cost = +calcPrice(fields)(prod.params).toFixed(2);
-
-      productParams.cost = cost;
-      sum += cost * productParams.count;
-
-      for (let key in prod.params) {
-        const value = prod.params[key];
-        const param = {
-          name: fields[key].label,
-          value: {
-            text:
-              fields[key].values && fields[key].values[value]
-                ? fields[key].values[value].text || value
-                : value,
-            value,
-          },
-        };
-        productParams.params[key] = param;
+      for (let key in params) {
+        productParams.params[key] = formatParam(params[key], fields[key]);
       }
-
-      const area = calcArea(prod.params);
-      productParams.params.area = {
-        name: 'Площадь',
-        value: {
-          text: area,
-          value: area,
-        },
-      };
 
       return (
         <React.Fragment key={id}>
@@ -97,7 +71,7 @@ export default function Cart() {
     });
   }
 
-  if (cart.cart.length === 0)
+  if (cart.length === 0)
     return (
       <PageLayout>
         <h1 className="heading">Корзина (пусто)</h1>
@@ -107,7 +81,7 @@ export default function Cart() {
 
   return (
     <PageLayout>
-      <h1 className="heading">Корзина ({cart.cart.length})</h1>
+      <h1 className="heading">Корзина ({cart.length})</h1>
 
       {products ? porductCards() : 'Загрузка...'}
       <hr />
@@ -119,4 +93,26 @@ export default function Cart() {
       </div>
     </PageLayout>
   );
+}
+
+function formatParam(value, field) {
+  const newParam = { name: field.label };
+
+  if (field.type === 'range') {
+    newParam.value = { text: value, value };
+  } else if (field.type === 'select') {
+    newParam.value = { text: field.values[value].text, value };
+  } else if (field.type === 'select-window') {
+    newParam.value = {
+      text: value.map(({ openTo, mosquitoNet }) => {
+        let text = getOpenToText(openTo);
+        if (mosquitoNet) text += ', москитная сетка';
+
+        return text;
+      }),
+      value: deepCopy(value),
+    };
+  }
+
+  return newParam;
 }
