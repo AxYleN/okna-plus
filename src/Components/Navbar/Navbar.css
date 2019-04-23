@@ -41,5 +41,7 @@
 }
 
 .navbar__link--back {
+  font-size: var(--font-size-sm);
+
   margin-left: auto;
 }
