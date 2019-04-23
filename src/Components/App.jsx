@@ -14,10 +14,22 @@ class App extends Component {
     editId: -1,
   };
 
+  componentDidMount() {
+    this.setState({
+      addToCart: this.addToCart,
+      removeFromCart: this.removeFromCart,
+    });
+  }
+
   addToCart = product => {
     this.setState({
       cart: [...this.state.cart, product],
-      editId: -1,
+    });
+  };
+
+  removeFromCart = id => {
+    this.setState({
+      cart: this.state.cart.filter((el, elId) => elId !== id),
     });
   };
 
@@ -32,9 +44,7 @@ class App extends Component {
                 <Route path="/cart" component={Cart} />
                 <Route
                   path="/:item"
-                  render={props => (
-                    <ConfigurationPage {...props} addToCart={this.addToCart} />
-                  )}
+                  render={props => <ConfigurationPage {...props} addToCart={this.addToCart} />}
                 />
                 <Route path="/" component={MainPage} />
               </Switch>

@@ -17,13 +17,8 @@ import {
 } from 'lib';
 
 export default function Cart() {
-  const { cart } = useContext(cartContext);
+  const { cart, removeFromCart } = useContext(cartContext);
   const [products, setProducts] = useState(null);
-
-  const keys = [];
-  cart.forEach(product => {
-    if (!keys.includes(product.key)) keys.push(product.key);
-  });
 
   useEffect(() => {
     axios.get('/api/products?extended=1').then(({ data }) => {
@@ -36,7 +31,7 @@ export default function Cart() {
 
       setProducts(arrayToObject(data, el => el.product_key));
     });
-  }, keys);
+  }, [cart]);
 
   let sum = 0;
 
@@ -65,7 +60,7 @@ export default function Cart() {
       return (
         <React.Fragment key={id}>
           <hr />
-          <ProductCard {...productParams} />
+          <ProductCard {...productParams} remove={() => removeFromCart(id)} />
         </React.Fragment>
       );
     });
