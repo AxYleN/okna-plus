@@ -77,6 +77,7 @@ class ConfigurationPage extends Component {
       case 'range':
         return field.min;
       case 'select':
+      case 'select-window':
         return Object.keys(field.values)[0];
       default:
         return null;

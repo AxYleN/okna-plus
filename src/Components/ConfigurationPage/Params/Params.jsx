@@ -47,7 +47,7 @@ function generateInputs(props) {
 
     if (type === 'range') {
       inputs.push(getRangeInput(props, onChange));
-    } else if (type === 'select' && key === 'window') {
+    } else if (type === 'select-window') {
       inputs.push(...getWindowInputs(props, onWindowChange));
     } else if (type === 'select') {
       inputs.push(getSelectInput(props, onChange));

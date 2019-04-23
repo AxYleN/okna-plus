@@ -72,7 +72,7 @@ export default class AdminProducts extends Component {
           continue;
         }
 
-        if (field.type === 'select') {
+        if (field.type === 'select' || field.type === 'select-window') {
           product[key] = this.getSelectValues(field);
           continue;
         }
@@ -241,7 +241,7 @@ function ProductsInputs({ group, values, onChange, name }) {
     ];
   }
 
-  if (group.type === 'select') {
+  if (group.type === 'select' || group.type === 'select-window') {
     const inputs = [];
 
     for (let key in group.values) {
