@@ -15,22 +15,24 @@ class App extends Component {
   };
 
   componentDidMount() {
+    const cart = JSON.parse(window.localStorage.getItem('cart')) || [];
     this.setState({
+      cart,
       addToCart: this.addToCart,
       removeFromCart: this.removeFromCart,
     });
   }
 
   addToCart = product => {
-    this.setState({
-      cart: [...this.state.cart, product],
-    });
+    const cart = [...this.state.cart, product];
+    this.setState({ cart });
+    window.localStorage.setItem('cart', JSON.stringify(cart));
   };
 
   removeFromCart = id => {
-    this.setState({
-      cart: this.state.cart.filter((el, elId) => elId !== id),
-    });
+    const cart = this.state.cart.filter((el, elId) => elId !== id);
+    this.setState({ cart });
+    window.localStorage.setItem('cart', JSON.stringify(cart));
   };
 
   render() {
