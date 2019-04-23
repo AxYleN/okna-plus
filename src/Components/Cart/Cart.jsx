@@ -6,7 +6,7 @@ import './Cart.css';
 
 import axios from 'axios';
 
-import cartContext from '../../cartContext';
+import cartContext from 'lib/cartContext';
 import { arrToObj as arrayToObject, calcArea, calcPrice } from 'lib';
 
 export default function Cart() {

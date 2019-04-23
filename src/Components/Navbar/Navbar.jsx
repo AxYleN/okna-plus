@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import './Navbar.css';
 
-import cartContext from '../../cartContext';
+import cartContext from 'lib/cartContext';
 
 export default function Navbar(props) {
   let backLink = null;

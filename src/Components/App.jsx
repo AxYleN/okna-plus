@@ -6,7 +6,7 @@ import ConfigurationPage from './ConfigurationPage/ConfigurationPage';
 import Admin from './Admin/Admin';
 import Cart from './Cart/Cart';
 
-import cartContext from '../cartContext';
+import cartContext from 'lib/cartContext';
 
 class App extends Component {
   state = {
