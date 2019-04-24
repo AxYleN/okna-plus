@@ -21,6 +21,11 @@ class App extends Component {
       addToCart: this.addToCart,
       removeFromCart: this.removeFromCart,
     });
+
+    window.addEventListener('storage', () => {
+      const cart = JSON.parse(window.localStorage.getItem('cart')) || this.state.cart;
+      this.setState({ cart });
+    });
   }
 
   addToCart = product => {
