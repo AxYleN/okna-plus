@@ -9,7 +9,13 @@ export default class WindowOptions extends Component {
     const name = target.name;
 
     const { value: oldValue, onChange } = this.props;
-    onChange({ ...oldValue, [name]: value });
+    const newValue = { ...oldValue, [name]: value };
+
+    if (value === 'no') {
+      newValue.mosquitoNet = false;
+    }
+
+    onChange(newValue);
   };
 
   mosquitoNet = () => (
@@ -18,7 +24,7 @@ export default class WindowOptions extends Component {
       <input
         type="checkbox"
         name="mosquitoNet"
-        value={this.props.value.mosquitoNet}
+        checked={this.props.value.mosquitoNet}
         onChange={this.onChange}
       />
     </label>
