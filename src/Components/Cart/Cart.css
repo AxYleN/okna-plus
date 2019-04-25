@@ -1,9 +1,24 @@
 .cart-footer {
   display: flex;
   align-items: baseline;
+
   margin: 2rem 20px;
 }
 
 .cart-footer__cost {
   margin-right: auto;
+}
+
+.cart__modal-edit {
+  width: var(--width-page);
+  margin: 3rem 1rem;
+}
+
+.cart__modal-buttons {
+  display: flex;
+}
+
+.modal__btn-primary {
+  width: 100%;
+  margin-left: 1rem;
 }

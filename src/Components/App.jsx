@@ -11,7 +11,6 @@ import cartContext from 'lib/cartContext';
 class App extends Component {
   state = {
     cart: [],
-    editId: -1,
   };
 
   componentDidMount() {
@@ -20,6 +19,7 @@ class App extends Component {
       cart,
       addToCart: this.addToCart,
       removeFromCart: this.removeFromCart,
+      changeProductAtId: this.changeProductAtId,
     });
 
     window.addEventListener('storage', () => {
@@ -28,14 +28,23 @@ class App extends Component {
     });
   }
 
+  changeProductAtId = (product, id) => {
+    const cart = [...this.state.cart];
+    cart[id] = { ...cart[id], ...product };
+    this.saveCart(cart);
+  };
+
   addToCart = product => {
     const cart = [...this.state.cart, product];
-    this.setState({ cart });
-    window.localStorage.setItem('cart', JSON.stringify(cart));
+    this.saveCart(cart);
   };
 
   removeFromCart = id => {
     const cart = this.state.cart.filter((el, elId) => elId !== id);
+    this.saveCart(cart);
+  };
+
+  saveCart = cart => {
     this.setState({ cart });
     window.localStorage.setItem('cart', JSON.stringify(cart));
   };

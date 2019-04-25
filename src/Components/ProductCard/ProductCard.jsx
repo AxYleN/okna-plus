@@ -3,7 +3,7 @@ import './ProductCard.css';
 import BlueprintCanvas from '../ConfigurationPage/Blueprint/BlueprintCanvas';
 
 export default function ProductCard(props) {
-  const { name, type, params, count, cost, area, remove } = props;
+  const { name, type, params, count, cost, area, remove, edit } = props;
   const paramsForCanvas = getValues(params);
 
   return (
@@ -11,7 +11,7 @@ export default function ProductCard(props) {
       <div className="product-card__info">
         <div className="product-card__header">
           <h2 className="product-card__name">{name}</h2>
-          <button className="product-card__button">Изменить</button>
+          <button className="product-card__button" onClick={edit}>Изменить</button>
           <button className="product-card__button" onClick={remove}>Удалить</button>
         </div>
         <ul className="product-card__params">

@@ -7,6 +7,8 @@ import './Cart.css';
 import axios from 'axios';
 
 import cartContext from 'lib/cartContext';
+import Modal from '../Modal/Modal';
+import ProductEdit from '../ProductEdit/ProductEdit';
 import {
   arrToObj as arrayToObject,
   calcArea,
@@ -17,8 +19,13 @@ import {
 } from 'lib';
 
 export default function Cart() {
-  const { cart, removeFromCart } = useContext(cartContext);
+  const { cart, removeFromCart, changeProductAtId } = useContext(cartContext);
   const [products, setProducts] = useState(null);
+  const [editId, setEditId] = useState(null);
+
+  useEffect(() => {
+    setEditId(null);
+  }, [cart]);
 
   useEffect(() => {
     axios.get('/api/products?extended=1').then(({ data }) => {
@@ -60,7 +67,11 @@ export default function Cart() {
       return (
         <React.Fragment key={id}>
           <hr />
-          <ProductCard {...productParams} remove={() => removeFromCart(id)} />
+          <ProductCard
+            {...productParams}
+            remove={() => removeFromCart(id)}
+            edit={() => setEditId(id)}
+          />
         </React.Fragment>
       );
     });
@@ -86,7 +97,36 @@ export default function Cart() {
         </div>
         <button className="btn">Оформить заказ</button>
       </div>
+      {editId !== null ? (
+        <ModalProductEdit
+          save={p => changeProductAtId({ params: p }, editId)}
+          product={products[cart[editId].key]}
+          params={cart[editId].params}
+          close={() => setEditId(null)}
+        />
+      ) : null}
     </PageLayout>
+  );
+}
+
+function ModalProductEdit({ params, product, save, close }) {
+  const [_params, setParams] = useState(params);
+
+  return (
+    <Modal onClose={close}>
+      <div className="cart__modal-edit">
+        <ProductEdit params={_params} product={product} setParams={setParams}>
+          <div className="cart__modal-buttons">
+            <button className="btn" onClick={close}>
+              Отмена
+            </button>
+            <button className="btn modal__btn-primary" onClick={() => save(_params)}>
+              Сохранить
+            </button>
+          </div>
+        </ProductEdit>
+      </div>
+    </Modal>
   );
 }
 
