@@ -1,0 +1,29 @@
+.product-edit {
+  display: flex;
+
+  margin-top: 2.5rem;
+}
+
+.product-edit__col {
+  display: flex;
+  flex-direction: column;
+
+  width: 21.875rem;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.product-edit__info {
+  display: flex;
+  flex-direction: column;
+
+  padding: .625rem;
+}
+
+.product-edit__price {
+  margin-top: 2rem;
+}
+
+.product-edit__area {
+  margin: .5rem 0 1rem;
+}

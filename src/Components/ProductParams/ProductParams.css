@@ -1,0 +1,17 @@
+.product-params {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-params > *:not(:first-child) {
+  margin-top: 1.5rem;
+}
+
+.product-params__select {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.product-params__select select {
+  margin: .25rem .625rem 0;
+}

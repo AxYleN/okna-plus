@@ -15,7 +15,7 @@ export default class WindowOptions extends Component {
       newValue.mosquitoNet = false;
     }
 
-    onChange(newValue);
+    onChange(this.props.name, newValue);
   };
 
   mosquitoNet = () => (
@@ -35,12 +35,14 @@ export default class WindowOptions extends Component {
 
     return (
       <label className="window-options">
-        <span className="window-options__caption">{label}</span>
+        <span className="window-options__caption">
+          <strong>{label}</strong>
+        </span>
         <SelectInput
           name="openTo"
           options={options}
           value={value.openTo}
-          className="settings__input window-options__select"
+          className="window-options__select"
           onChange={this.onChange}
         />
         {value.openTo === 'no' ? null : <this.mosquitoNet />}

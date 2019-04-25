@@ -10,10 +10,12 @@
 
 .window-options__select {
   order: 2;
+
+  margin: .25rem .625rem 0;
 }
 
 .window-options__checkbox {
   flex-basis: 60%;
 
-  color: var(--link-color);
+  color: var(--color-secondary-dark);
 }

@@ -41,10 +41,23 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 input,
-button {
+button,
+select {
   font: inherit;
 
   color: inherit;
+}
+
+select {
+  width: 100%;
+
+  border: none;
+  border-bottom: 2px solid var(--color-secondary);
+  outline: none;
+}
+
+select:focus {
+  border-color: var(--color-hero);
 }
 
 a {

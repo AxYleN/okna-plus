@@ -1,3 +1,5 @@
+import { mapObj } from '../misc';
+
 function getDefaultValue(field) {
   switch (field.type) {
     case 'range':
@@ -15,13 +17,7 @@ function getDefaultValue(field) {
 }
 
 function getDefaultParams(fields) {
-  const values = {};
-
-  for (let key in fields) {
-    values[key] = getDefaultValue(fields[key]);
-  }
-
-  return values;
+  return mapObj(fields, getDefaultValue);
 }
 
 export default getDefaultParams;
