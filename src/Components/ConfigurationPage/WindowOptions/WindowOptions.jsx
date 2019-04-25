@@ -4,10 +4,7 @@ import './WindowOptions.css';
 import SelectInput from '../../SelectInput';
 
 export default class WindowOptions extends Component {
-  onChange = ({ target }) => {
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-
+  onChange = (name, value) => {
     const { value: oldValue, onChange } = this.props;
     const newValue = { ...oldValue, [name]: value };
 
@@ -25,7 +22,10 @@ export default class WindowOptions extends Component {
         type="checkbox"
         name="mosquitoNet"
         checked={this.props.value.mosquitoNet}
-        onChange={this.onChange}
+        onChange={({ target }) => {
+          const { name, checked } = target;
+          this.onChange(name, checked);
+        }}
       />
     </label>
   );
