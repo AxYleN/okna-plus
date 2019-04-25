@@ -58,10 +58,7 @@ function getRangeInput({ field, key, value, onChange }) {
     min: field.min,
     max: field.max,
     value,
-    onChange: e => {
-      const { name, value } = e.target;
-      onChange(name, value);
-    },
+    onChange,
   };
 
   return (
@@ -78,10 +75,7 @@ function getSelectInput({ field, key, value, onChange }) {
     name: key,
     options: getOptionsArray(field.values),
     value,
-    onChange: e => {
-      const { name, value } = e.target;
-      onChange(name, value);
-    },
+    onChange,
   };
 
   return (
@@ -103,7 +97,7 @@ function getSelectWindowInput({ field, key, value, onChange }) {
       label: `${field.label} ${i + 1}`,
       options,
       value: value[i],
-      onChange: onChange,
+      onChange,
       name,
     };
 

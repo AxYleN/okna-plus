@@ -15,11 +15,7 @@ export default class AdminProducts extends Component {
     loading: true,
   };
 
-  onChange = e => {
-    const target = e.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    let name = target.name;
-
+  onChange = (name, value) => {
     const path = name.split('-');
     name = path.pop();
 

@@ -14,7 +14,9 @@ export default class RangeInput extends Component {
 
   changeValue = e => {
     this.onChange(e);
-    this.props.onChange(e);
+
+    const { name, value } = e.target;
+    this.props.onChange(name, value);
   };
 
   onChange = e => {

@@ -1,17 +1,33 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 /**
  * Возвращает элемент select со списком опций
  * @param {{options: [{value: string, text: string}]}} props
  */
 export default function SelectInput(props) {
-  const { options, ...rest } = props;
+  const { options, onChange, ...rest } = props;
 
-  const optionsList = options.map(opt => (
-    <option value={opt.value} key={opt.value}>
-      {String(opt.text)}
-    </option>
-  ));
+  const change = useCallback(
+    e => {
+      const { name, value } = e.target;
+      if (onChange) onChange(name, value);
+    },
+    [onChange],
+  );
 
-  return <select {...rest}>{optionsList}</select>;
+  const optionsList = useMemo(
+    () =>
+      options.map(opt => (
+        <option value={opt.value} key={opt.value}>
+          {String(opt.text)}
+        </option>
+      )),
+    [options],
+  );
+
+  return (
+    <select {...rest} onChange={change}>
+      {optionsList}
+    </select>
+  );
 }
