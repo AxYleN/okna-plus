@@ -1,14 +1,16 @@
 .product-card {
   display: flex;
 
-  padding: 0 20px;
-  margin: 2rem 0;
+  margin: 1rem 0;
+  padding: 0 1rem;
 }
 
 .product-card__info {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+
+  margin: 1rem 0;
 }
 
 .product-card__header {
@@ -19,7 +21,7 @@
   font-size: var(--font-size-rg);
   font-weight: var(--font-semibold);
 
-  margin-right: 2rem;
+  margin: 0 2rem 0 0;
 }
 
 .product-card__button {
@@ -44,13 +46,12 @@
 
 .product-card__params {
   font-size: var(--font-size-sm);
-  line-height: 1.6;
+  line-height: 1.5;
 
   padding: 0 10px;
 
   list-style: none;
 }
-
 
 .product-card__final-info {
   margin-top: auto;

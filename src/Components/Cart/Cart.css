@@ -1,3 +1,7 @@
+.cart-hr {
+  margin-top: 2rem;
+}
+
 .cart-footer {
   display: flex;
   align-items: baseline;

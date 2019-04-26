@@ -15,12 +15,7 @@ class App extends Component {
 
   componentDidMount() {
     const cart = JSON.parse(window.localStorage.getItem('cart')) || [];
-    this.setState({
-      cart,
-      addToCart: this.addToCart,
-      removeFromCart: this.removeFromCart,
-      changeProductAtId: this.changeProductAtId,
-    });
+    this.setState({ cart });
 
     window.addEventListener('storage', () => {
       const cart = JSON.parse(window.localStorage.getItem('cart')) || this.state.cart;
@@ -50,17 +45,22 @@ class App extends Component {
   };
 
   render() {
+    const { state, removeFromCart: remove, changeProductAtId: change, addToCart: add } = this;
+
     return (
       <div className="App">
-        <cartContext.Provider value={this.state}>
+        <cartContext.Provider value={state}>
           <BrowserRouter>
             <>
               <Switch>
                 <Route path="/admin" component={Admin} />
-                <Route path="/cart" component={Cart} />
+                <Route
+                  path="/cart"
+                  render={props => <Cart {...props} removeProduct={remove} changeAtId={change} />}
+                />
                 <Route
                   path="/:item"
-                  render={props => <ConfigurationPage {...props} addToCart={this.addToCart} />}
+                  render={props => <ConfigurationPage {...props} addToCart={add} />}
                 />
                 <Route path="/" component={MainPage} />
               </Switch>

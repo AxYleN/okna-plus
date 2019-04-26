@@ -22,7 +22,7 @@ export default function ProductCard(props) {
         </ul>
         <div className="product-card__final-info">
           <span>
-            <strong>Стоимость:</strong> {cost} руб.
+            <strong>Стоимость:</strong> {cost.toFixed(2)} руб.
           </span>
           <span className="final-info__count">
             <strong>Количество:</strong> {count}
