@@ -39,13 +39,24 @@ class App extends Component {
     this.saveCart(cart);
   };
 
+  clearCart = () => {
+    const cart = [];
+    this.saveCart(cart);
+  };
+
   saveCart = cart => {
     this.setState({ cart });
     window.localStorage.setItem('cart', JSON.stringify(cart));
   };
 
   render() {
-    const { state, removeFromCart: remove, changeProductAtId: change, addToCart: add } = this;
+    const {
+      state,
+      removeFromCart: remove,
+      changeProductAtId: change,
+      addToCart: add,
+      clearCart: clear,
+    } = this;
 
     return (
       <div className="App">
@@ -56,7 +67,9 @@ class App extends Component {
                 <Route path="/admin" component={Admin} />
                 <Route
                   path="/cart"
-                  render={props => <Cart {...props} removeProduct={remove} changeAtId={change} />}
+                  render={props => (
+                    <Cart {...props} removeProduct={remove} changeAtId={change} clearCart={clear} />
+                  )}
                 />
                 <Route
                   path="/:item"

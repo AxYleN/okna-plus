@@ -5,14 +5,16 @@ import './Cart.css';
 import PageLayout from '../PageLayout/PageLayout';
 import CartProductsList from './CartProductsList';
 import CartModalEdit from './CartModalEdit';
+import CartModalOrder from './CartModalOrder';
 
 import cartContext from 'lib/cartContext';
 import { getOpenToValues, arrToObj, calcPrice } from 'lib';
 
-export default function Cart({ removeProduct, changeAtId }) {
+export default function Cart({ removeProduct, changeAtId, clearCart }) {
   const { cart } = useContext(cartContext);
   const [products, setProducts] = useState();
   const [editId, setEditId] = useState(null);
+  const [showOrderModal, setShowOrderModal] = useState(false);
 
   useEffect(() => {
     setEditId(null);
@@ -30,6 +32,14 @@ export default function Cart({ removeProduct, changeAtId }) {
       setProducts(arrToObj(data, el => el.product_key));
     });
   }, []);
+
+  function handleOrder(client) {
+    axios.post('/api/orders', { client, products: cart }).then(({ data }) => {
+      setShowOrderModal(false);
+      console.log(data);
+      // clearCart();
+    });
+  }
 
   // РЕНДЕР
   if (cart.length === 0) {
@@ -50,6 +60,7 @@ export default function Cart({ removeProduct, changeAtId }) {
     );
   }
 
+  const price = getPrice(cart, products).toFixed(2);
   return (
     <PageLayout>
       <h1 className="heading">Корзина ({cart.length})</h1>
@@ -63,9 +74,11 @@ export default function Cart({ removeProduct, changeAtId }) {
       />
       <div className="cart-footer">
         <div className="cart-footer__cost">
-          <strong>Итого:</strong> {getPrice(cart, products).toFixed(2)} руб.
+          <strong>Итого:</strong> {price} руб.
         </div>
-        <button className="btn">Оформить заказ</button>
+        <button className="btn" onClick={() => setShowOrderModal(true)}>
+          Оформить заказ
+        </button>
       </div>
       <CartModalEdit
         cart={cart}
@@ -74,6 +87,13 @@ export default function Cart({ removeProduct, changeAtId }) {
         onClose={() => setEditId(null)}
         onSave={changeAtId}
       />
+      {showOrderModal ? (
+        <CartModalOrder
+          price={price}
+          onClose={() => setShowOrderModal(false)}
+          onOrder={handleOrder}
+        />
+      ) : null}
     </PageLayout>
   );
 }

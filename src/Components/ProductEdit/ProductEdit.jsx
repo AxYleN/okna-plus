@@ -22,7 +22,7 @@ export default function ProductEdit(props) {
               <strong>Цена:</strong> {getPrice(params).toFixed(2)} рублей
             </div>
             <div className="product-edit__area">
-              <strong>Площадь:</strong> {calcArea(params)} м<sup>2</sup>
+              <strong>Площадь:</strong> {calcArea(params).toFixed(2)} м<sup>2</sup>
             </div>
           </div>
           {children}

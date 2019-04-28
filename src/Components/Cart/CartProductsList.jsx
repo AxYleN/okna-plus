@@ -13,7 +13,7 @@ export default function CartProductsList({ cart, products, onEdit, onRemove }) {
     const productParams = {
       name: product.name,
       type: product.type,
-      area: calcArea(params),
+      area: calcArea(params).toFixed(2),
       params: {},
       count,
       cost,

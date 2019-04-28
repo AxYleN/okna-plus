@@ -58,7 +58,7 @@ function getRangeInput({ field, key, value, onChange }) {
     min: field.min,
     max: field.max,
     value,
-    onChange,
+    onChange: (key, val) => onChange(key, +val),
   };
 
   return (
