@@ -35,3 +35,17 @@
 .btn:focus {
   border-color: var(--color-hero);
 }
+
+.btn--text {
+  padding: 0;
+
+  color: var(--color-primary);
+  border: none;
+  border-radius: 0;
+  background: none;
+}
+
+.btn--text:hover,
+.btn--text:focus {
+  color: var(--color-hero);
+}

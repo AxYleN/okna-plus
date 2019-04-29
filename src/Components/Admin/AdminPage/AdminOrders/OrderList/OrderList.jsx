@@ -41,7 +41,7 @@ export default function OrderList({ orders, onSelect }) {
               {order.price.toFixed(2)} руб.
             </td>
             <td className="order-list__td order-list__more">
-              <button className="order-list__btn" onClick={() => onSelect(order.id)}>
+              <button className="btn btn--text order-list__btn" onClick={() => onSelect(order.id)}>
                 Подробнее
               </button>
             </td>

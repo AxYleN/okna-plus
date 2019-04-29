@@ -40,15 +40,4 @@
 
 .order-list__btn {
   width: 100%;
-
-  cursor: pointer;
-
-  border: none;
-  outline: none;
-  background: none;
-}
-
-.order-list__btn:focus,
-.order-list__btn:hover {
-  color: var(--color-hero);
 }

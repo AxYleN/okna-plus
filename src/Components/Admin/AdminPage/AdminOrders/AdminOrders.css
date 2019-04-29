@@ -13,3 +13,13 @@
 .admin-orders-pagination__input {
   margin: 0 .5rem;
 }
+
+.admin-orders-pagination__btn {
+  padding: 0 1rem;
+}
+
+.admin-orders-pagination__btn:disabled {
+  cursor: initial;
+
+  opacity: 0;
+}
