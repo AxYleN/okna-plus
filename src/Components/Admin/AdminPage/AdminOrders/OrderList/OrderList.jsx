@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './OrderList.css';
 
 const dateFormat = {
@@ -7,7 +8,7 @@ const dateFormat = {
   day: 'numeric',
 };
 
-export default function OrderList({ orders, onSelect }) {
+export default function OrderList({ orders, url }) {
   return (
     <table className="order-list">
       <thead className="order-list__header">
@@ -41,9 +42,9 @@ export default function OrderList({ orders, onSelect }) {
               {order.price.toFixed(2)} руб.
             </td>
             <td className="order-list__td order-list__more">
-              <button className="btn btn--text order-list__btn" onClick={() => onSelect(order.id)}>
+              <Link to={`${url}/${order.id}`} className="btn btn--text order-list__btn">
                 Подробнее
-              </button>
+              </Link>
             </td>
           </tr>
         ))}

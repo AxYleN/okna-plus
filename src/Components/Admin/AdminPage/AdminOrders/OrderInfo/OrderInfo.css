@@ -1,0 +1,84 @@
+.admin-order-info {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  width: var(--width-page);
+  max-width: 100%;
+  min-height: 80vh;
+  padding: 1.5rem 3rem;
+}
+
+.admin-order-info__close-btn {
+  font-size: 2rem;
+  line-height: 1;
+
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+
+  width: 2rem;
+  height: 2rem;
+}
+
+.admin-order-info__header {
+  display: flex;
+  justify-content: center;
+}
+
+.admin-order-info__date {
+  font-size: var(--font-size-sm);
+
+  text-align: center;
+
+  opacity: .75;
+}
+
+.admin-order-info__info {
+  display: flex;
+  justify-content: space-between;
+
+  margin: 2rem 0;
+}
+
+.admin-order-client-info {
+  display: flex;
+  flex-direction: column;
+
+  margin: 0 2rem;
+
+  text-align: center;
+}
+
+.admin-order-client-info__title {
+  font-weight: var(--font-semibold);
+}
+
+.admin-order-client-info__value {
+  font-size: var(--font-size-sm);
+
+  margin-top: .5rem;
+}
+
+.admin-order-info__cart-header {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-semibold);
+
+  display: flex;
+}
+
+.admin-order-info__status {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-regular);
+
+  margin-left: auto;
+}
+
+.admin-order-info__footer {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+
+  margin-top: auto;
+}

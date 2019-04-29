@@ -11,8 +11,16 @@ export default function ProductCard(props) {
       <div className="product-card__info">
         <div className="product-card__header">
           <h2 className="product-card__name">{name}</h2>
-          <button className="product-card__button" onClick={edit}>Изменить</button>
-          <button className="product-card__button" onClick={remove}>Удалить</button>
+          {edit ? (
+            <button className="product-card__button" onClick={edit}>
+              Изменить
+            </button>
+          ) : null}
+          {remove ? (
+            <button className="product-card__button" onClick={remove}>
+              Удалить
+            </button>
+          ) : null}
         </div>
         <ul className="product-card__params">
           <ParamsList params={params} />

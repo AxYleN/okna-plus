@@ -39,5 +39,9 @@
 }
 
 .order-list__btn {
+  display: inline-block;
+
   width: 100%;
+
+  text-align: center;
 }

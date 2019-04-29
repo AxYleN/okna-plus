@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './AdminOrders.css';
 import OrderList from './OrderList/OrderList';
+import { Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 import RangeInput from './../../../RangeInput/RangeInput';
+import OrderInfo from './OrderInfo/OrderInfo';
 
-export default function AdminOrders() {
+export default function AdminOrders(props) {
   const [orders, setOrders] = useState(null);
   const [page, setPage] = useState(1);
 
@@ -18,10 +20,6 @@ export default function AdminOrders() {
         setOrders(undefined);
       });
   }, [page]);
-
-  function selectOrder(id) {
-    console.log(id);
-  }
 
   if (orders === null) {
     return (
@@ -41,11 +39,12 @@ export default function AdminOrders() {
   }
 
   const pagesCount = Math.ceil(orders.ordersCount / 10);
+  const url = props.match.url;
   return (
     <div className="admin-container">
       <h1 className="heading">Заказы</h1>
       <div className="admin-orders-list-wrapper">
-        <OrderList orders={orders.orders} onSelect={selectOrder} />
+        <OrderList orders={orders.orders} url={url} />
       </div>
       <div className="admin-orders-pagination">
         <button
@@ -73,6 +72,18 @@ export default function AdminOrders() {
           &gt;
         </button>
       </div>
+      <Switch>
+        <Route
+          path={url + '/:id'}
+          render={props => (
+            <OrderInfo
+              {...props}
+              orderId={props.match.params.id}
+              onClose={() => props.history.push(url)}
+            />
+          )}
+        />
+      </Switch>
     </div>
   );
 }
