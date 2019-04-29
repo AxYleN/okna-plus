@@ -1,0 +1,15 @@
+.admin-orders-list-wrapper {
+  overflow-x: auto;
+
+  max-width: 100%;
+  margin: 2rem 0;
+}
+
+.admin-orders-pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.admin-orders-pagination__input {
+  margin: 0 .5rem;
+}

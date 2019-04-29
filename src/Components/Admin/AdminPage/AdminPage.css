@@ -18,3 +18,8 @@
 .admin__main-container {
   margin-left: 18.75rem;
 }
+
+.admin-container {
+  max-width: var(--width-page);
+  margin: 8rem auto 5rem;
+}
