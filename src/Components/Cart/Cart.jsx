@@ -36,8 +36,7 @@ export default function Cart({ removeProduct, changeAtId, clearCart }) {
   function handleOrder(client) {
     axios.post('/api/orders', { client, products: cart }).then(({ data }) => {
       setShowOrderModal(false);
-      console.log(data);
-      // clearCart();
+      clearCart();
     });
   }
 
