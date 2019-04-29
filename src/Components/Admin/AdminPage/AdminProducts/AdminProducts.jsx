@@ -156,7 +156,7 @@ export default class AdminProducts extends Component {
   render() {
     return (
       <div className="products">
-        <h1 className="products__heading">Товары</h1>
+        <h1 className="heading">Товары</h1>
 
         <Loading loaded={!this.state.loading} placeholder="Загрузка...">
           <Products
