@@ -4,6 +4,7 @@ import './OrderInfo.css';
 
 import Modal from '../../../../Modal/Modal';
 import ProductCard from '../../../../ProductCard/ProductCard';
+import OrderInfoPrint from './OrderInfoPrint';
 
 export default function OrderInfo({ orderId, onClose }) {
   const [order, setOrder] = useState(null);
@@ -12,9 +13,7 @@ export default function OrderInfo({ orderId, onClose }) {
     axios
       .get(`/api/orders/${orderId}`)
       .then(({ data }) => {
-        setTimeout(() => {
-          setOrder(data);
-        }, 1000);
+        setOrder(data);
       })
       .catch(onClose);
   }, [orderId]);
@@ -32,50 +31,57 @@ export default function OrderInfo({ orderId, onClose }) {
   const { order: orderInfo, cart } = order;
   const client = orderInfo.client;
   return (
-    <Modal onClose={onClose}>
-      <div className="admin-order-info">
-        <button className="btn btn--text admin-order-info__close-btn" onClick={onClose}>
-          &times;
-        </button>
-        <div className="admin-order-info__header">
-          <h2 className="heading">Заказ № {orderInfo.id}</h2>
-        </div>
-        <div className="admin-order-info__date">от {new Date(orderInfo.date).toLocaleString()}</div>
-        <div className="admin-order-info__info">
-          <OrderClientInfo title="ФИО">
-            {`${client.lname} ${client.fname} ${client.patronymic}`}
-          </OrderClientInfo>
-          <OrderClientInfo title="Телефон">
-            <a href={`tel:${client.phone}`}>{client.phone}</a>
-          </OrderClientInfo>
-          <OrderClientInfo title="Адрес">{client.addess}</OrderClientInfo>
-          <OrderClientInfo title="Email">
-            {client.email ? <a href={`mailto:${client.email}`}>{client.email}</a> : '—'}
-          </OrderClientInfo>
-        </div>
-        <div className="admin-order-info__cart">
-          <div className="admin-order-info__cart-header">
-            Список товаров
-            <span className="admin-order-info__status">Статус: {orderInfo.status}</span>
+    <>
+      <Modal onClose={onClose}>
+        <div className="admin-order-info">
+          <button className="btn btn--text admin-order-info__close-btn" onClick={onClose}>
+            &times;
+          </button>
+          <div className="admin-order-info__header">
+            <h2 className="heading">Заказ № {orderInfo.id}</h2>
           </div>
-          <hr />
-          {cart.map((product, id) => (
-            <React.Fragment key={id}>
-              <ProductCard {...product} />
-              <hr />
-            </React.Fragment>
-          ))}
-        </div>
-        <div className="admin-order-info__footer">
-          <div>
-            <strong>Итого:</strong> {orderInfo.price.toFixed(2)} руб.
+          <div className="admin-order-info__date">
+            от {new Date(orderInfo.date).toLocaleString()}
           </div>
-          <div className="admin-order-info__footer-buttons">
-            <button className="btn">Распечатать</button>
+          <div className="admin-order-info__info">
+            <OrderClientInfo title="ФИО">
+              {`${client.lname} ${client.fname} ${client.patronymic}`}
+            </OrderClientInfo>
+            <OrderClientInfo title="Телефон">
+              <a href={`tel:${client.phone}`}>{client.phone}</a>
+            </OrderClientInfo>
+            <OrderClientInfo title="Адрес">{client.addess}</OrderClientInfo>
+            <OrderClientInfo title="Email">
+              {client.email ? <a href={`mailto:${client.email}`}>{client.email}</a> : '—'}
+            </OrderClientInfo>
+          </div>
+          <div className="admin-order-info__cart">
+            <div className="admin-order-info__cart-header">
+              Список товаров
+              <span className="admin-order-info__status">Статус: {orderInfo.status}</span>
+            </div>
+            <hr />
+            {cart.map((product, id) => (
+              <React.Fragment key={id}>
+                <ProductCard {...product} />
+                <hr />
+              </React.Fragment>
+            ))}
+          </div>
+          <div className="admin-order-info__footer">
+            <div>
+              <strong>Итого:</strong> {orderInfo.price.toFixed(2)} руб.
+            </div>
+            <div className="admin-order-info__footer-buttons">
+              <button className="btn" onClick={() => window.print()}>Распечатать</button>
+            </div>
           </div>
         </div>
+      </Modal>
+      <div className="print-only">
+        <OrderInfoPrint {...order} />
       </div>
-    </Modal>
+    </>
   );
 }
 

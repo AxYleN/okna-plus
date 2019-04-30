@@ -11,7 +11,7 @@ export default function AdminPage(props) {
 
   return (
     <div className="admin__container">
-      <aside className="admin__sidebar">
+      <aside className="admin__sidebar no-print">
         <AdminNav matchUrl={matchUrl} />
       </aside>
       <main className="admin__main-container">

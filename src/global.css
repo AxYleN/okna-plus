@@ -19,7 +19,7 @@
 .btn {
   font-size: var(--font-size-rg);
 
-  padding: .75rem 2rem;
+  padding: 0.75rem 2rem;
 
   cursor: pointer;
   user-select: none;
@@ -48,4 +48,16 @@
 .btn--text:hover,
 .btn--text:focus {
   color: var(--color-hero);
+}
+
+@media not print {
+  .print-only {
+    display: none;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
 }

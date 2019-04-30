@@ -22,7 +22,7 @@ export default function Modal(props) {
   }, [props]);
 
   return (
-    <div className="modal" onClick={onClose}>
+    <div className="modal no-print" onClick={onClose}>
       <div className="modal-container" onClick={e => e.stopPropagation()}>
         {props.children}
       </div>

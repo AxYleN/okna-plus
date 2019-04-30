@@ -1,0 +1,156 @@
+@media print {
+  *,
+  *:before,
+  *:after,
+  *:first-letter,
+  p:first-line,
+  div:first-line,
+  blockquote:first-line,
+  li:first-line {
+    color: #000 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  @page {
+    margin: 1cm 1cm;
+
+    size: A4 portrait;
+  }
+
+  hr {
+    opacity: 1;
+    border-color: #000;
+  }
+
+  .print-order-header {
+    line-height: 1;
+
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .print-order-header__heading {
+    font-size: 16pt;
+    font-weight: 600;
+
+    margin: 0 1cm 0 .5cm;
+
+    text-align: center;
+  }
+
+  .print-table tr td:not(:first-child) {
+    font-weight: 600;
+
+    padding-left: .25cm;
+  }
+
+  .print-order-header__order {
+    font-size: 10pt;
+  }
+
+  .print-order-header__info {
+    font-size: 8pt;
+
+    margin: 0 .5cm 0 auto;
+  }
+
+  .print-order-summary {
+    font-size: 10pt;
+
+    margin-top: .5cm;
+  }
+
+  .print-order-heading {
+    font-size: 14pt;
+    font-weight: var(--font-semibold);
+
+    text-transform: uppercase;
+  }
+
+  .print-order-product {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .print-order-product__heading {
+    font-size: 12pt;
+    font-weight: var(--font-semibold);
+
+    padding: 0 .25cm;
+
+    background-color: #eee !important;
+
+    -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+  }
+
+  .print-order-product__container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .print-order-product__blueprint {
+    width: 8cm;
+  }
+
+  .print-order-product__blueprint canvas {
+    margin-top: .25cm;
+  }
+
+  .print-order-product__info {
+    font-size: 8pt;
+
+    margin-left: 1cm;
+  }
+
+  .print-order-product__info td {
+    padding: .05cm .25cm;
+  }
+
+  .print-order-product__info-heading {
+    font-size: 10pt;
+    font-weight: var(--font-semibold);
+  }
+
+  .print-order-product__summary {
+    font-size: 10pt;
+
+    width: 100%;
+
+    border-collapse: collapse;
+  }
+
+  .print-order-product__summary td {
+    border-bottom: 1px solid #ccc;
+  }
+
+  .print-order-footer {
+    font-size: 8pt;
+
+    margin-top: .5cm;
+  }
+
+  .print-order-signature {
+    font-size: 7pt;
+
+    width: 100%;
+    margin-top: 1cm;
+  }
+
+  .print-order-signature tr:nth-child(2n) td {
+    text-align: right;
+
+    border-top: 1px solid #ccc;
+  }
+
+  .print-order-signature td {
+    width: 40%;
+  }
+  .print-order-signature td:nth-child(2) {
+    width: 5%;
+
+    border-top: none !important;
+  }
+}

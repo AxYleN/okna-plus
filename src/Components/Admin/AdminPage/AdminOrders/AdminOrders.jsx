@@ -42,35 +42,37 @@ export default function AdminOrders(props) {
   const url = props.match.url;
   return (
     <div className="admin-container">
-      <h1 className="heading">Заказы</h1>
-      <div className="admin-orders-list-wrapper">
-        <OrderList orders={orders.orders} url={url} />
-      </div>
-      <div className="admin-orders-pagination">
-        <button
-          disabled={page < 2}
-          className="btn btn--text admin-orders-pagination__btn"
-          onClick={() => setPage(page - 1)}>
-          &lt;
-        </button>
-        Страница
-        <div className="admin-orders-pagination__input">
-          <RangeInput
-            value={page}
-            key={page}
-            min="1"
-            style={{ width: `${pagesCount.toString().length + 2}ch` }}
-            max={pagesCount}
-            onChange={(key, val) => setPage(+val)}
-          />
+      <div className="no-print">
+        <h1 className="heading">Заказы</h1>
+        <div className="admin-orders-list-wrapper">
+          <OrderList orders={orders.orders} url={url} />
         </div>
-        из {pagesCount}
-        <button
-          disabled={page >= pagesCount}
-          className="btn btn--text admin-orders-pagination__btn"
-          onClick={() => setPage(page + 1)}>
-          &gt;
-        </button>
+        <div className="admin-orders-pagination">
+          <button
+            disabled={page < 2}
+            className="btn btn--text admin-orders-pagination__btn"
+            onClick={() => setPage(page - 1)}>
+            &lt;
+          </button>
+          Страница
+          <div className="admin-orders-pagination__input">
+            <RangeInput
+              value={page}
+              key={page}
+              min="1"
+              style={{ width: `${pagesCount.toString().length + 2}ch` }}
+              max={pagesCount}
+              onChange={(key, val) => setPage(+val)}
+            />
+          </div>
+          из {pagesCount}
+          <button
+            disabled={page >= pagesCount}
+            className="btn btn--text admin-orders-pagination__btn"
+            onClick={() => setPage(page + 1)}>
+            &gt;
+          </button>
+        </div>
       </div>
       <Switch>
         <Route
