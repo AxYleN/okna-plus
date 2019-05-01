@@ -6,8 +6,16 @@ import AdminNav from './AdminNav/AdminNav';
 import AdminProducts from './AdminProducts/AdminProducts';
 import AdminOrders from './AdminOrders/AdminOrders';
 
+function isLoggedIn() {
+  return true;
+}
+
 export default function AdminPage(props) {
   const matchUrl = props.match.url;
+
+  if (!isLoggedIn()) {
+    return <Redirect to={matchUrl + '/login'} />;
+  }
 
   return (
     <div className="admin__container">

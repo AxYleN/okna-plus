@@ -11,6 +11,7 @@ function MainPage() {
   const [products, setProducts] = useState(null);
 
   useEffect(() => {
+    document.title = 'Окна-плюс';
     axios.get('/api/products').then(res => {
       setProducts(res.data);
     });

@@ -21,6 +21,10 @@ export default function AdminOrders(props) {
       });
   }, [page]);
 
+  useEffect(() => {
+    document.title = 'Окна-плюс | Заказы';
+  });
+
   if (orders === null) {
     return (
       <div className="admin-container">

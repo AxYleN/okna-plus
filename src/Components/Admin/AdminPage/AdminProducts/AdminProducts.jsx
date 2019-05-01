@@ -29,6 +29,7 @@ export default class AdminProducts extends Component {
   };
 
   componentDidMount() {
+    document.title = 'Окна-плюс | Товары';
     axios
       .get(`/api/products?extended=true`)
       .then(({ data }) => this.setValues(data))

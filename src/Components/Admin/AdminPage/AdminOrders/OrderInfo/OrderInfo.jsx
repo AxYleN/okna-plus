@@ -10,6 +10,10 @@ export default function OrderInfo({ orderId, onClose }) {
   const [order, setOrder] = useState(null);
 
   useEffect(() => {
+    document.title = `Окна-плюс | Заказ № ${orderId}`;
+  });
+
+  useEffect(() => {
     axios
       .get(`/api/orders/${orderId}`)
       .then(({ data }) => {
@@ -73,7 +77,9 @@ export default function OrderInfo({ orderId, onClose }) {
               <strong>Итого:</strong> {orderInfo.price.toFixed(2)} руб.
             </div>
             <div className="admin-order-info__footer-buttons">
-              <button className="btn" onClick={() => window.print()}>Распечатать</button>
+              <button className="btn" onClick={() => window.print()}>
+                Распечатать
+              </button>
             </div>
           </div>
         </div>
