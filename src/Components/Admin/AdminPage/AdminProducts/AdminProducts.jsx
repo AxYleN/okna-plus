@@ -45,9 +45,7 @@ export default class AdminProducts extends Component {
     const values = this.getValues(data);
     const oldValues = deepCopy(values);
 
-    this.setState({ products: data, values, oldValues, loading: false }, () =>
-      console.log(this.state),
-    );
+    this.setState({ products: data, values, oldValues, loading: false });
   }
 
   getValues(products) {

@@ -1,16 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Login.css';
 
 export default function Login(props) {
+  const [password, setPassword] = useState('');
+
   return (
     <div className="login__wrapper">
       <form className="login__form">
-        <h2>Войти</h2>
+        <h1 className="heading login__heading">Авторизация</h1>
         <label>
-          <h5>Пароль</h5>
-          <input type="password" className="login__input" />
+          <input
+            type="password"
+            className="login__input"
+            placeholder="Пароль"
+            autoComplete="off"
+            onChange={e => setPassword(e.target.value)}
+            value={password}
+          />
         </label>
-        <button className="login__btn">Войти</button>
+        <button className="btn login__btn">Войти</button>
       </form>
     </div>
   );
