@@ -78,7 +78,7 @@ export default function CartModalOrder({ price, onClose, onOrder }) {
             onChange={handleInput}
           />
           <div className="cart-modal-order__buttons">
-            <button type="button" className="btn" onClick={onClose}>
+            <button type="button" className="btn btn--text modal__btn-secondary" onClick={onClose}>
               Отмена
             </button>
             <button className="btn cart-modal-order__btn">Оформить заказ</button>

@@ -26,7 +26,7 @@ export default function CartModalEdit({ onClose, onSave, products, cart, editId 
       <div className="cart__modal-edit">
         <ProductEdit params={tempParams} product={product} setParams={setTempParams}>
           <div className="cart__modal-buttons">
-            <button className="btn" onClick={onClose}>
+            <button className="btn btn--text modal__btn-secondary" onClick={onClose}>
               Отмена
             </button>
             <button
