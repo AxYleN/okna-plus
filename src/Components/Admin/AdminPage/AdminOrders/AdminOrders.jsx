@@ -5,6 +5,8 @@ import { Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 import RangeInput from './../../../RangeInput/RangeInput';
 import OrderInfo from './OrderInfo/OrderInfo';
+import ReactSVG from 'react-svg';
+import Arrow from 'svg/chevron-left.svg';
 
 export default function AdminOrders(props) {
   const [orders, setOrders] = useState(null);
@@ -59,7 +61,7 @@ export default function AdminOrders(props) {
             disabled={page < 2}
             className="btn btn--text admin-orders-pagination__btn"
             onClick={() => setPage(page - 1)}>
-            &lt;
+            <ReactSVG src={Arrow} svgClassName="admin-orders-prev-icon"/>
           </button>
           Страница
           <div className="admin-orders-pagination__input">
@@ -77,7 +79,7 @@ export default function AdminOrders(props) {
             disabled={page >= pagesCount}
             className="btn btn--text admin-orders-pagination__btn"
             onClick={() => setPage(page + 1)}>
-            &gt;
+            <ReactSVG src={Arrow} svgClassName="admin-orders-next-icon"/>
           </button>
         </div>
       </div>

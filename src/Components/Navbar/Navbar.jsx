@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import ReactSVG from 'react-svg';
 import Cart from 'svg/shopping-cart.svg';
+import Back from 'svg/chevron-left.svg';
 
 import './Navbar.css';
 
@@ -14,7 +15,7 @@ export default function Navbar(props) {
   if (props.backLink) {
     backLink = (
       <Link className="navbar__link navbar__link--back" to={props.backLink}>
-        &lt; Назад
+        <ReactSVG src={Back} svgClassName="navbar__back" /> Назад
       </Link>
     );
   }

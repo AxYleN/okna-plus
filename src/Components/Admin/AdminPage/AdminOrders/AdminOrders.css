@@ -16,6 +16,32 @@
 
 .admin-orders-pagination__btn {
   padding: 0 1rem;
+
+  transition: color .15s;
+
+  color: var(--color-secondary);
+}
+
+.admin-orders-pagination__btn:hover,
+.admin-orders-pagination__btn:focus {
+  color: var(--color-primary);
+}
+
+.admin-orders-prev-icon {
+  line-height: 1;
+
+  width: .85rem;
+
+  fill: currentColor;
+}
+
+.admin-orders-next-icon {
+  transform: rotateZ(180deg);
+  line-height: 1;
+
+  width: .85rem;
+
+  fill: currentColor;
 }
 
 .admin-orders-pagination__btn:disabled {
