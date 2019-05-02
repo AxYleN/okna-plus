@@ -7,7 +7,8 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "2.1.8"
+    "react-scripts": "2.1.8",
+    "react-svg": "^9.0.4"
   },
   "proxy": "http://localhost:8080",
   "scripts": {

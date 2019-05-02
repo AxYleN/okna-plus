@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import ReactSVG from 'react-svg';
+import Cart from 'svg/shopping-cart.svg';
 
 import './Navbar.css';
 
@@ -23,8 +25,9 @@ export default function Navbar(props) {
         <Link to="/">
           <h2 className="navbar__header">Окна-Плюс</h2>
         </Link>
-        <Link to="/cart" className="navbar__link">
-          Корзина: {cart.cart.length}
+        <Link to="/cart" className="navbar__link navbar__cart-group">
+          <ReactSVG src={Cart} svgClassName="navbar__cart-icon" />
+          <span className="navbar__cart-count-wrapper">{cart.cart.length}</span>
         </Link>
         {backLink}
       </div>
