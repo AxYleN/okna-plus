@@ -6,7 +6,7 @@ import Modal from '../../../../Modal/Modal';
 import ProductCard from '../../../../ProductCard/ProductCard';
 import OrderInfoPrint from './OrderInfoPrint';
 
-export default function OrderInfo({ orderId, onClose }) {
+export default function OrderInfo({ orderId, onClose, history }) {
   const [order, setOrder] = useState(null);
 
   useEffect(() => {
@@ -19,7 +19,12 @@ export default function OrderInfo({ orderId, onClose }) {
       .then(({ data }) => {
         setOrder(data);
       })
-      .catch(onClose);
+      .catch(err => {
+        if (err.response.status === 401) {
+          return history.push('/admin/login');
+        }
+        onClose();
+      });
   }, [orderId]);
 
   if (order === null) {

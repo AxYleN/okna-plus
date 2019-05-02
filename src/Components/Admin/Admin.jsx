@@ -7,9 +7,6 @@ const AdminPage = React.lazy(() => import('./AdminPage/AdminPage'));
 export default function Admin(props) {
   const matchUrl = props.match.url;
 
-  // Если не залогинился - перенаправить на страницу логина
-  // Если залогинился - перенаправить на страницу с ценами
-
   return (
     <div>
       <Suspense fallback="Загрузка...">

@@ -13,11 +13,6 @@
 
   margin-bottom: 10rem;
   padding: 3rem 3rem;
-
-  border-top: 2px solid var(--color-hero);
-  border-bottom: 2px solid var(--color-hero);
-  border-radius: var(--border-radius-md);
-  background-color: var(--color-bg);
 }
 
 .login__heading {
@@ -25,7 +20,7 @@
 }
 
 .login__input {
-  margin: 2rem 0 1.5rem;
+  margin: 3rem 0 .5rem 0;
   padding: .2rem;
 
   border: none;
@@ -40,4 +35,22 @@
 
 .login__btn {
   width: 100%;
+  margin-top: 1.5rem;
+}
+
+.login__error {
+  font-size: var(--font-size-sm);
+
+  animation: error-appear .15s ease-out backwards;
+
+  color: var(--color-danger);
+}
+
+@keyframes error-appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

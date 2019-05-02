@@ -17,6 +17,9 @@ export default function AdminOrders(props) {
         setOrders(data);
       })
       .catch(err => {
+        if (err.response.status === 401) {
+          return props.history.push('/admin/login');
+        }
         setOrders(undefined);
       });
   }, [page]);

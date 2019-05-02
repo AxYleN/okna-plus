@@ -7,6 +7,7 @@ import Admin from './Admin/Admin';
 import Cart from './Cart/Cart';
 
 import cartContext from 'lib/cartContext';
+import axios from 'axios';
 
 class App extends Component {
   state = {
@@ -17,9 +18,19 @@ class App extends Component {
     const cart = JSON.parse(window.localStorage.getItem('cart')) || [];
     this.setState({ cart });
 
-    window.addEventListener('storage', () => {
-      const cart = JSON.parse(window.localStorage.getItem('cart')) || this.state.cart;
-      this.setState({ cart });
+    const jwt = window.localStorage.getItem('jwt');
+    if (jwt) {
+      axios.defaults.headers.common['Authorization'] = jwt;
+    }
+
+    window.addEventListener('storage', e => {
+      if (e.key === 'cart') {
+        const cart = JSON.parse(window.localStorage.getItem('cart')) || this.state.cart;
+        this.setState({ cart });
+      }
+      if (e.key === 'jwt') {
+        axios.defaults.headers.common['Authorization'] = window.localStorage.getItem('jwt');
+      }
     });
   }
 

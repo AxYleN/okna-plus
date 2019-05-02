@@ -148,7 +148,11 @@ export default class AdminProducts extends Component {
         this.setValues(data);
       })
       .catch(err => {
-        this.setState({ loading: false });
+        if (err.response.status === 401) {
+          this.props.history.push('/admin/login');
+        } else {
+          this.setState({ loading: false });
+        }
       });
   };
 

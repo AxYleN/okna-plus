@@ -1,21 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import './AdminPage.css';
 
 import AdminNav from './AdminNav/AdminNav';
 import AdminProducts from './AdminProducts/AdminProducts';
 import AdminOrders from './AdminOrders/AdminOrders';
-
-function isLoggedIn() {
-  return true;
-}
+import axios from 'axios';
 
 export default function AdminPage(props) {
   const matchUrl = props.match.url;
 
-  if (!isLoggedIn()) {
+  if (!window.localStorage.getItem('jwt')) {
     return <Redirect to={matchUrl + '/login'} />;
   }
+
+  useEffect(() => {
+    axios.get('/api/user').catch(err => {
+      window.localStorage.removeItem('jwt');
+      props.history.push(matchUrl + '/login');
+    });
+  }, []);
 
   return (
     <div className="admin__container">
