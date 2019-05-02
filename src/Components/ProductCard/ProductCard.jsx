@@ -1,9 +1,10 @@
 import React from 'react';
 import './ProductCard.css';
 import BlueprintCanvas from '../ConfigurationPage/Blueprint/BlueprintCanvas';
+import RangeInput from './../RangeInput/RangeInput';
 
 export default function ProductCard(props) {
-  const { name, type, params, count, cost, area, remove, edit } = props;
+  const { name, type, params, count, setCount, cost, area, remove, edit } = props;
   const paramsForCanvas = getValues(params);
 
   return (
@@ -33,7 +34,12 @@ export default function ProductCard(props) {
             <strong>Стоимость:</strong> {cost.toFixed(2)} руб.
           </span>
           <span className="final-info__count">
-            <strong>Количество:</strong> {count}
+            <strong>Количество:</strong>{' '}
+            {!setCount ? (
+              count
+            ) : (
+              <RangeInput onChange={(k, v) => setCount(+v)} value={count} min="1" max="10" />
+            )}
           </span>
         </div>
       </div>

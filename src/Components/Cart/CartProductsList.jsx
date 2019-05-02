@@ -2,7 +2,7 @@ import React from 'react';
 import ProductCard from '../ProductCard/ProductCard';
 import { calcPrice, calcArea, getOpenToText, deepCopy } from 'lib';
 
-export default function CartProductsList({ cart, products, onEdit, onRemove }) {
+export default function CartProductsList({ cart, products, onEdit, onRemove, change }) {
   const productsList = cart.map((currentProduct, id) => {
     const { params, count } = currentProduct;
     const product = products[currentProduct.key];
@@ -25,7 +25,12 @@ export default function CartProductsList({ cart, products, onEdit, onRemove }) {
 
     return (
       <React.Fragment key={id}>
-        <ProductCard {...productParams} remove={() => onRemove(id)} edit={() => onEdit(id)} />
+        <ProductCard
+          {...productParams}
+          remove={() => onRemove(id)}
+          edit={() => onEdit(id)}
+          setCount={count => change({ count }, id)}
+        />
         <hr />
       </React.Fragment>
     );

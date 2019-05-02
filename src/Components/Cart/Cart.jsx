@@ -71,6 +71,7 @@ export default function Cart({ removeProduct, changeAtId, clearCart }) {
         products={products}
         onEdit={setEditId}
         onRemove={removeProduct}
+        change={changeAtId}
       />
       <div className="cart-footer">
         <div className="cart-footer__cost">
