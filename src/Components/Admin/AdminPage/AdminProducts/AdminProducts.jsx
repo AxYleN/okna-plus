@@ -167,7 +167,7 @@ export default class AdminProducts extends Component {
             values={this.state.values}
             onChange={this.onChange}
           />
-          <button className="products__save" onClick={this.saveValues}>
+          <button className="btn products__save" onClick={this.saveValues}>
             Сохранить
           </button>
         </Loading>
@@ -182,7 +182,7 @@ function Products({ products, values, onChange }) {
     return (
       <React.Fragment key={key}>
         <section className="product">
-          <h2 className="product__name">{product.name}</h2>
+          <h2 className="product__name subheading">{product.name}</h2>
           <ProductsGroup
             values={values[key]}
             onChange={onChange}
