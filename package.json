@@ -8,7 +8,8 @@
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
-    "react-svg": "^9.0.4"
+    "react-svg": "^9.0.4",
+    "react-text-mask": "^5.4.3"
   },
   "proxy": "http://localhost:8080",
   "scripts": {

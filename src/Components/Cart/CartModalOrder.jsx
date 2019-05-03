@@ -1,6 +1,28 @@
 import React, { useState } from 'react';
+import MaskedInput from 'react-text-mask';
 
 import Modal from '../Modal/Modal';
+
+const phoneMask = [
+  '+',
+  '7',
+  ' ',
+  '(',
+  /[1-9]/,
+  /\d/,
+  /\d/,
+  ')',
+  ' ',
+  /\d/,
+  /\d/,
+  /\d/,
+  '-',
+  /\d/,
+  /\d/,
+  '-',
+  /\d/,
+  /\d/,
+];
 
 export default function CartModalOrder({ price, onClose, onOrder }) {
   const [customer, setCustomer] = useState({
@@ -52,10 +74,13 @@ export default function CartModalOrder({ price, onClose, onOrder }) {
             value={customer.patronymic}
             onChange={handleInput}
           />
-          <input
+          <MaskedInput
+            mask={phoneMask}
             className={inputClass}
             name="phone"
             placeholder="Номер телефона*"
+            onFocus={e => (e.target.placeholder = '+7 (___) ___-__-__')}
+            onBlur={e => (e.target.placeholder = 'Номер телефона*')}
             type="tel"
             value={customer.phone}
             onChange={handleInput}
