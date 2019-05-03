@@ -19,10 +19,11 @@
 .btn {
   font-size: var(--font-size-rg);
 
-  padding: 0.75rem 2rem;
+  padding: .75rem 2rem;
 
   cursor: pointer;
   user-select: none;
+  transition: .15s ease-in-out;
 
   color: var(--color-inverse);
   border: 2px solid var(--color-primary);
@@ -48,6 +49,11 @@
 .btn--text:hover,
 .btn--text:focus {
   color: var(--color-hero);
+}
+
+.btn--success {
+  border-color: var(--color-success);
+  background-color: var(--color-success);
 }
 
 @media not print {
