@@ -5,6 +5,7 @@ import './OrderInfo.css';
 import Modal from '../../../../Modal/Modal';
 import ProductCard from '../../../../ProductCard/ProductCard';
 import OrderInfoPrint from './OrderInfoPrint';
+import { formatNumber } from 'lib';
 
 export default function OrderInfo({ orderId, onClose, history }) {
   const [order, setOrder] = useState(null);
@@ -79,7 +80,7 @@ export default function OrderInfo({ orderId, onClose, history }) {
           </div>
           <div className="admin-order-info__footer">
             <div>
-              <strong>Итого:</strong> {orderInfo.price.toFixed(2)} руб.
+              <strong>Итого:</strong> {formatNumber(orderInfo.price)} руб.
             </div>
             <div className="admin-order-info__footer-buttons">
               <button className="btn" onClick={() => window.print()}>

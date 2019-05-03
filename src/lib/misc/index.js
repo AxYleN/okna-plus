@@ -5,5 +5,6 @@ import deepCopy from './deepCopy';
 import objDiff from './objDiff';
 import arrToObj from './arrToObj';
 import mapObj from './mapObj';
+import formatNumber from './formatNumber';
 
-export { ifNotNull, objToArr, clamp, deepCopy, objDiff, arrToObj, mapObj };
+export { ifNotNull, objToArr, clamp, deepCopy, objDiff, arrToObj, mapObj, formatNumber };

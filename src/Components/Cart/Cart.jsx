@@ -8,7 +8,7 @@ import CartModalEdit from './CartModalEdit';
 import CartModalOrder from './CartModalOrder';
 
 import cartContext from 'lib/cartContext';
-import { getOpenToValues, arrToObj, calcPrice } from 'lib';
+import { getOpenToValues, arrToObj, calcPrice, formatNumber } from 'lib';
 
 export default function Cart({ removeProduct, changeAtId, clearCart }) {
   const { cart } = useContext(cartContext);
@@ -75,7 +75,7 @@ export default function Cart({ removeProduct, changeAtId, clearCart }) {
       />
       <div className="cart-footer">
         <div className="cart-footer__cost">
-          <strong>Итого:</strong> {price} руб.
+          <strong>Итого:</strong> {formatNumber(+price)} руб.
         </div>
         <button className="btn" onClick={() => setShowOrderModal(true)}>
           Оформить заказ

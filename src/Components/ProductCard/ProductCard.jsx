@@ -2,6 +2,7 @@ import React from 'react';
 import './ProductCard.css';
 import BlueprintCanvas from '../ConfigurationPage/Blueprint/BlueprintCanvas';
 import RangeInput from './../RangeInput/RangeInput';
+import { formatNumber } from 'lib';
 
 export default function ProductCard(props) {
   const { name, type, params, count, setCount, cost, area, remove, edit } = props;
@@ -31,7 +32,7 @@ export default function ProductCard(props) {
         </ul>
         <div className="product-card__final-info">
           <span>
-            <strong>Стоимость:</strong> {cost.toFixed(2)} руб.
+            <strong>Стоимость:</strong> {formatNumber(cost)} руб.
           </span>
           <span className="final-info__count">
             <strong>Количество:</strong>{' '}

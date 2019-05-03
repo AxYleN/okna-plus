@@ -1,7 +1,7 @@
 import React from 'react';
 import './OrderInfoPrint.css';
 import BlueprintCanvas from '../../../../ConfigurationPage/Blueprint/BlueprintCanvas';
-import { mapObj } from 'lib';
+import { mapObj, formatNumber } from 'lib';
 
 const dateFormat = {
   year: 'numeric',
@@ -68,7 +68,7 @@ export default function OrderInfoPrint({ order, cart }) {
           </tr>
           <tr>
             <td>Сумма:</td>
-            <td>{order.price.toFixed(2)} руб.</td>
+            <td>{formatNumber(order.price)} руб.</td>
           </tr>
           <tr>
             <td>Количество конструкций:</td>
@@ -79,7 +79,7 @@ export default function OrderInfoPrint({ order, cart }) {
           <tr>
             <td>Общая площадь заказа:</td>
             <td>
-              {cart.reduce((acc, val) => acc + val.area * val.count, 0)} м<sup>2</sup>
+              {cart.reduce((acc, val) => acc + val.area * val.count, 0).toFixed(2)} м<sup>2</sup>
             </td>
           </tr>
         </tbody>
@@ -229,8 +229,8 @@ function ProductComponent({ product, id }) {
           <tr>
             <td>{name}</td>
             <td>{count} шт</td>
-            <td>{cost.toFixed(2)} р.</td>
-            <td>{(cost * count).toFixed(2)} р.</td>
+            <td>{formatNumber(cost)} р.</td>
+            <td>{formatNumber(cost * count)} р.</td>
           </tr>
           {mosquitoNet === null ? null : (
             <tr>
@@ -246,7 +246,7 @@ function ProductComponent({ product, id }) {
             </td>
             <td />
             <td />
-            <td>{(cost * count).toFixed(2)} р.</td>
+            <td>{formatNumber(cost * count)} р.</td>
           </tr>
         </tbody>
       </table>

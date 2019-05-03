@@ -69,7 +69,8 @@
     text-transform: uppercase;
   }
 
-  .print-order-product {
+  .print-order-product,
+  .print-order-footer {
     break-inside: avoid;
     page-break-inside: avoid;
   }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './OrderList.css';
+import { formatNumber } from 'lib';
 
 const dateFormat = {
   year: 'numeric',
@@ -39,7 +40,7 @@ export default function OrderList({ orders, url }) {
               </a>
             </td>
             <td className="order-list__td order-list__small order-list__tar">
-              {order.price.toFixed(2)} руб.
+              {formatNumber(order.price)} руб.
             </td>
             <td className="order-list__td order-list__more">
               <Link to={`${url}/${order.id}`} className="btn btn--text order-list__btn">

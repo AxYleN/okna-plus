@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import './ProductEdit.css';
 import Blueprint from './../ConfigurationPage/Blueprint/Blueprint';
 import ProductParams from './../ProductParams/ProductParams';
-import { calcPrice, calcArea } from 'lib';
+import { calcPrice, calcArea, formatNumber } from 'lib';
 
 export default function ProductEdit(props) {
   const { params, product, setParams, children } = props;
@@ -19,7 +19,7 @@ export default function ProductEdit(props) {
           <div className="product-edit__info">
             <ProductParams fields={product.fields} params={params} setParams={setParams} />
             <div className="product-edit__price">
-              <strong>Цена:</strong> {getPrice(params).toFixed(2)} рублей
+              <strong>Цена:</strong> {formatNumber(getPrice(params))} рублей
             </div>
             <div className="product-edit__area">
               <strong>Площадь:</strong> {calcArea(params).toFixed(2)} м<sup>2</sup>
