@@ -2,7 +2,7 @@ import React, { useEffect, useCallback } from 'react';
 import './Modal.css';
 
 export default function Modal(props) {
-  const { onClose } = props;
+  const { onClose, containerClass = 'modal-container' } = props;
 
   const handleKeypress = useCallback(
     e => {
@@ -23,7 +23,7 @@ export default function Modal(props) {
 
   return (
     <div className="modal no-print" onClick={onClose}>
-      <div className="modal-container" onClick={e => e.stopPropagation()}>
+      <div className={containerClass} onClick={e => e.stopPropagation()}>
         {props.children}
       </div>
     </div>

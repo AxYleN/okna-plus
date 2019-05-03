@@ -15,6 +15,7 @@
 
 .cart__modal-edit {
   width: var(--width-page);
+  max-width: 100%;
   margin: 3rem 1rem;
 }
 
