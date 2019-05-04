@@ -68,7 +68,7 @@ export default function OrderInfo({ orderId, onClose, history }) {
           <div className="admin-order-info__cart">
             <div className="admin-order-info__cart-header">
               Список товаров
-              <span className="admin-order-info__status">Статус: {orderInfo.status}</span>
+              {/* <span className="admin-order-info__status">Статус: {orderInfo.status}</span> */}
             </div>
             <hr />
             {cart.map((product, id) => (
