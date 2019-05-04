@@ -6,6 +6,7 @@ import PageLayout from '../PageLayout/PageLayout';
 import CartProductsList from './CartProductsList';
 import CartModalEdit from './CartModalEdit';
 import CartModalOrder from './CartModalOrder';
+import Modal from './../Modal/Modal';
 
 import cartContext from 'lib/cartContext';
 import { getOpenToValues, arrToObj, calcPrice, formatNumber } from 'lib';
@@ -15,6 +16,7 @@ export default function Cart({ removeProduct, changeAtId, clearCart }) {
   const [products, setProducts] = useState();
   const [editId, setEditId] = useState(null);
   const [showOrderModal, setShowOrderModal] = useState(false);
+  const [orderInfoModal, setOrderInfoModal] = useState(null);
 
   useEffect(() => {
     setEditId(null);
@@ -38,6 +40,7 @@ export default function Cart({ removeProduct, changeAtId, clearCart }) {
     axios.post('/api/orders', { client, products: cart }).then(({ data }) => {
       setShowOrderModal(false);
       clearCart();
+      setOrderInfoModal(<OrderInfoModal data={data} onClose={() => setOrderInfoModal(null)} />);
     });
   }
 
@@ -47,6 +50,7 @@ export default function Cart({ removeProduct, changeAtId, clearCart }) {
       <PageLayout>
         <h1 className="heading">Корзина (пусто)</h1>
         Вы не выбрали ни одного товара.
+        {orderInfoModal}
       </PageLayout>
     );
   }
@@ -56,6 +60,7 @@ export default function Cart({ removeProduct, changeAtId, clearCart }) {
       <PageLayout>
         <h1 className="heading">Корзина ({cart.length})</h1>
         Загрузка...
+        {orderInfoModal}
       </PageLayout>
     );
   }
@@ -95,7 +100,29 @@ export default function Cart({ removeProduct, changeAtId, clearCart }) {
           onOrder={handleOrder}
         />
       ) : null}
+      {orderInfoModal}
     </PageLayout>
+  );
+}
+
+function OrderInfoModal({ data, onClose }) {
+  return (
+    <Modal onClose={onClose}>
+      <div className="cart-modal-order-info">
+        <h2 className="heading">Заказ оформлен</h2>
+        <div className="cart-modal-order-info__info">
+          <div>
+            Номер заказа: <strong>{data.orderId}</strong>
+          </div>
+          <div>
+            Стоимость: <strong>{formatNumber(data.price)}</strong> руб.
+          </div>
+        </div>
+        <button onClick={onClose} className="btn">
+          Закрыть
+        </button>
+      </div>
+    </Modal>
   );
 }
 

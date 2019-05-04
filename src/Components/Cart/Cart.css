@@ -87,3 +87,17 @@
   width: 100%;
   margin-left: 1rem;
 }
+
+.cart-modal-order-info {
+  display: flex;
+  flex-direction: column;
+
+  max-width: 25rem;
+  padding: 2rem;
+}
+
+.cart-modal-order-info__info {
+  line-height: 1.6;
+
+  margin: 2rem 0 1rem;
+}
