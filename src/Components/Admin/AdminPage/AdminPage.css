@@ -8,6 +8,9 @@
   top: 0;
   left: 0;
 
+  display: flex;
+  flex-direction: column;
+
   width: 18.75rem;
   height: 100%;
 
@@ -22,6 +25,21 @@
 .admin-container {
   max-width: var(--width-page);
   margin: 8rem auto 5rem;
+}
+
+.admin__logout-btn {
+  width: 100%;
+  margin: auto 0 1rem 0;
+  padding: 1rem;
+
+  opacity: .75;
+  color: var(--color-secondary);
+}
+
+.admin__logout-btn:hover,
+.admin__logout-btn:focus {
+  opacity: 1;
+  color: var(--color-secondary);
 }
 
 @media print {

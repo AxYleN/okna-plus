@@ -21,10 +21,19 @@ export default function AdminPage(props) {
     });
   }, []);
 
+  const logout = () => {
+    window.localStorage.removeItem('jwt');
+    axios.defaults.headers.common['Authorization'] = undefined;
+    props.history.push('/admin/login');
+  };
+
   return (
     <div className="admin__container">
       <aside className="admin__sidebar no-print">
         <AdminNav matchUrl={matchUrl} />
+        <button className="btn btn--text admin__logout-btn" onClick={logout}>
+          Выйти
+        </button>
       </aside>
       <main className="admin__main-container">
         <Switch>
