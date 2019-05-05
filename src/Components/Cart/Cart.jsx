@@ -23,7 +23,7 @@ export default function Cart({ removeProduct, changeAtId, clearCart }) {
   }, [cart]);
 
   useEffect(() => {
-    document.title = 'Окна-плюс | Корзина';
+    document.title = 'Окна-Плюс | Корзина';
     axios.get('/api/products?extended=1').then(({ data }) => {
       data.forEach(product => {
         const fields = product.fields;

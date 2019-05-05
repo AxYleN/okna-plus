@@ -27,7 +27,7 @@ export default function AdminOrders(props) {
   }, [page]);
 
   useEffect(() => {
-    document.title = 'Окна-плюс | Заказы';
+    document.title = 'Окна-Плюс | Заказы';
   });
 
   if (orders === null) {

@@ -23,7 +23,7 @@ export default function Login(props) {
   }
 
   useEffect(() => {
-    document.title = 'Окна-плюс | Авторизация';
+    document.title = 'Окна-Плюс | Авторизация';
   }, []);
 
   return (

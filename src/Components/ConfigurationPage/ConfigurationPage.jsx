@@ -13,7 +13,7 @@ export default function ConfigurationPage(props) {
     axios
       .get(`/api/products/${props.match.params.item}`)
       .then(({ data }) => {
-        document.title = `Окна-плюс | ${data.name}`;
+        document.title = `Окна-Плюс | ${data.name}`;
         const { fields } = data;
 
         if (fields.window) {

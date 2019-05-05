@@ -11,7 +11,7 @@ export default function OrderInfo({ orderId, onClose, history }) {
   const [order, setOrder] = useState(null);
 
   useEffect(() => {
-    document.title = `Окна-плюс | Заказ № ${orderId}`;
+    document.title = `Окна-Плюс | Заказ № ${orderId}`;
   });
 
   useEffect(() => {
