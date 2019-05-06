@@ -5,6 +5,7 @@ import './AdminPage.css';
 import AdminNav from './AdminNav/AdminNav';
 import AdminProducts from './AdminProducts/AdminProducts';
 import AdminOrders from './AdminOrders/AdminOrders';
+import AdminStats from './AdminStats/AdminStats';
 import axios from 'axios';
 
 export default function AdminPage(props) {
@@ -39,6 +40,7 @@ export default function AdminPage(props) {
         <Switch>
           <Route path={matchUrl + '/products'} component={AdminProducts} />
           <Route path={matchUrl + '/orders'} component={AdminOrders} />
+          <Route path={matchUrl + '/stats'} component={AdminStats} />
           <Redirect to={matchUrl + '/orders'} />
         </Switch>
       </main>

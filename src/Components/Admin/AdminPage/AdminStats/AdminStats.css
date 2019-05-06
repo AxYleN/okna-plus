@@ -1,0 +1,26 @@
+.admin-stats__section {
+  margin: 3rem 1rem .625rem 1.5rem;
+
+  break-inside: avoid;
+}
+
+.admin-stats__section:first-of-type {
+  margin-top: 1rem;
+}
+
+.admin-stats__table th {
+  font-weight: var(--font-semibold);
+
+  padding: 0 1rem;
+}
+
+.admin-stats__table td {
+  padding: 0 1rem;
+}
+
+.text--right {
+  text-align: right;
+}
+.text--center {
+  text-align: center;
+}

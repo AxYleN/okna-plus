@@ -15,6 +15,9 @@ export default function AdminNav(props) {
       <NavLink {...linkStyles} to={matchUrl + '/orders'}>
         Список заказов
       </NavLink>
+      <NavLink {...linkStyles} to={matchUrl + '/stats'}>
+        Статистика
+      </NavLink>
       <NavLink {...linkStyles} to={matchUrl + '/products'}>
         Товары
       </NavLink>

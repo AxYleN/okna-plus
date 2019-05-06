@@ -24,7 +24,7 @@
 
 .admin-container {
   max-width: var(--width-page);
-  margin: 8rem auto 5rem;
+  margin: 4rem auto 5rem;
 }
 
 .admin__logout-btn {
