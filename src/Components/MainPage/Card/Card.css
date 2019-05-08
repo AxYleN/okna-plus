@@ -1,7 +1,7 @@
 .card {
   width: 45%;
   min-width: 18.75rem;
-  margin: 1rem;
+  margin: 2.5%;
 
   text-decoration: none;
 
@@ -28,4 +28,14 @@
   padding: 0 1.5rem 1.25rem;
 
   text-align: center;
+}
+
+@media (max-width: 42rem) {
+  .card {
+    width: 45%;
+    min-width: 15rem;
+  }
+  .card__img-container {
+    height: 15rem;
+  }
 }

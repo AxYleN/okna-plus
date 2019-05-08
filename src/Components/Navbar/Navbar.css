@@ -5,7 +5,7 @@
 
   width: 100%;
   height: 4.375rem;
-  max-height: 10vh;
+  max-height: 15vh;
 
   color: var(--color-inverse);
   background-color: var(--color-primary);
@@ -61,6 +61,8 @@
 .navbar__cart-group {
   line-height: 1;
 
+  margin-left: 2rem;
+
   transition: color .15s ease-in-out;
 
   color: var(--color-secondary-dark);
@@ -72,7 +74,6 @@
 
 .navbar__cart-icon {
   width: 1.7rem;
-  margin-left: 2rem;
 
   fill: currentColor;
 }
@@ -97,4 +98,33 @@
   border: 2px solid var(--color-primary);
   border-radius: 50%;
   background: var(--color-secondary-dark);
+}
+
+@media (max-width: 42rem) {
+  .navbar {
+    height: 3rem;
+  }
+
+  .navbar__container {
+    padding-right: 0;
+  }
+
+  .navbar__cart-group {
+    display: flex;
+
+    margin-left: auto;
+  }
+
+  .navbar__cart-count-wrapper {
+    position: initial;
+
+    margin-left: 1rem;
+
+    border-color: var(--color-secondary-dark);
+    background: none;
+  }
+
+  .navbar__link--back {
+    display: none;
+  }
 }

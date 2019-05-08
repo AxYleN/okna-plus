@@ -64,3 +64,33 @@
 .product-card__image {
   max-width: 300px;
 }
+
+@media (max-width: 42rem) {
+  .product-card__header {
+    flex-wrap: wrap;
+  }
+
+  .product-card__name {
+    flex-basis: 100%;
+  }
+
+  .product-card__button {
+    margin: .5rem 1rem 0 0;
+  }
+
+  .product-card__final-info {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .final-info__count {
+    margin: 0 0 .5rem 0;
+  }
+}
+
+@media (max-width: 31rem) {
+  .product-card {
+    align-items: center;
+    flex-direction: column;
+  }
+}

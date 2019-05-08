@@ -16,7 +16,7 @@
 .cart__modal-edit {
   width: var(--width-page);
   max-width: 100%;
-  margin: 3rem 1rem;
+  padding: 3rem 1rem;
 }
 
 .cart__modal-buttons {
@@ -100,4 +100,22 @@
   line-height: 1.6;
 
   margin: 2rem 0 1rem;
+}
+
+@media (max-width: 42rem) {
+  .cart-footer {
+    flex-wrap: wrap;
+  }
+
+  .cart-footer .btn {
+    flex-grow: 1;
+  }
+
+  .cart-footer__cost {
+    flex-grow: 1;
+
+    margin: 0 auto 1.25rem;
+
+    text-align: center;
+  }
 }

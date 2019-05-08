@@ -3,10 +3,11 @@
   align-items: center;
   flex-direction: column;
 
-  width: 37.5rem;
+  max-width: 37.5rem;
+  margin-right: 1rem;
 }
 
 .blueprint canvas {
   position: sticky;
-  top: 15vh;
+  top: 17vh;
 }

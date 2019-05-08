@@ -3,3 +3,9 @@
   max-width: var(--width-page);
   margin: 9rem auto 2rem auto;
 }
+
+@media (max-width: 42rem) {
+  .page-layout-container {
+    margin-top: 4rem;
+  }
+}
