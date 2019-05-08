@@ -91,7 +91,7 @@ export default function MonthlyChart({ ordersAndIncomeMonthly }) {
         />
       </section>
       <section className="admin-stats__section">
-        <h2 className="subheading">Выручка</h2>
+        <h2 className="subheading">Стоимость заказов</h2>
         <Chart
           options={{
             stroke: {

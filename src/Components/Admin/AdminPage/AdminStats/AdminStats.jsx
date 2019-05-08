@@ -19,6 +19,8 @@ export default function AdminStats() {
   const [stats, setStats] = useState(null);
 
   useEffect(() => {
+    document.title = 'Окна-Плюс | Статистика';
+
     axios.get('/api/stats').then(({ data }) => {
       setStats(data);
     });
