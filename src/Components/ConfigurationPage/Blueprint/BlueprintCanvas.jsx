@@ -11,9 +11,9 @@ export default class BlueprintCanvas extends Component {
 
   canvasRef = React.createRef();
   colors = {
-    dark: '#505050',
-    mid: '#AAAAAA',
-    light: '#DDDDDD',
+    dark: '#222222',
+    mid: '#999999',
+    light: '#eeeeee',
   };
   frame = {
     x1: this.padding,
@@ -182,7 +182,7 @@ export default class BlueprintCanvas extends Component {
     const [winPadding] = this.normalize(openTo === 'no' ? 30 : 60);
 
     this.ctx.save();
-    this.ctx.fillStyle = openTo !== 'no' && mosquitoNet ? this.colors.mid : this.colors.light;
+    this.ctx.fillStyle = this.colors.light;
     const glassSize = this.drawGlass(widthPx, shift, winPadding);
     this.ctx.restore();
 
@@ -191,6 +191,20 @@ export default class BlueprintCanvas extends Component {
 
       const [x, y, w, h] = this.rectWithPadding(...glassSize, -framePading);
       this.strokeRect(x, y, w, h);
+
+      if (mosquitoNet) {
+        const rectsCount = 16;
+        const [x, y, w, h] = glassSize;
+        const rW = w / rectsCount;
+        const rH = h / rectsCount;
+        this.ctx.save();
+        this.ctx.strokeStyle = this.colors.mid;
+        for (let i = 1; i < rectsCount; i++) {
+          this.strokeLine(Point(x + rW * i, y), Point(x + rW * i, y + h));
+          this.strokeLine(Point(x, y + rH * i), Point(x + w, y + rH * i));
+        }
+        this.ctx.restore();
+      }
 
       const windowCenterY = (y + h + y) / 2;
       const knobWidth = framePading / 3;
