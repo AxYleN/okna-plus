@@ -25,3 +25,7 @@
   color: var(--color-inverse);
   background-color: rgba(255, 255, 255, .2);
 }
+
+.admin-nav__ref-system {
+  font-size: var(--font-size-sm);
+}

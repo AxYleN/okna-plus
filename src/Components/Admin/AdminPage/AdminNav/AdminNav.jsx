@@ -21,6 +21,9 @@ export default function AdminNav(props) {
       <NavLink {...linkStyles} to={matchUrl + '/products'}>
         Товары
       </NavLink>
+      <a href="/ref.pdf" className="admin-nav__link admin-nav__ref-system">
+        Справочная система
+      </a>
     </nav>
   );
 }
