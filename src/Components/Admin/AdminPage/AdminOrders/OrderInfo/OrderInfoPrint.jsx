@@ -73,7 +73,7 @@ export default function OrderInfoPrint({ order, cart }) {
           <tr>
             <td>Количество конструкций:</td>
             <td>
-              {cart.reduce((acc, val) => acc + val.count, 0)} шт. (Изделий: {cart.length} шт.)
+              {cart.length} шт. (Изделий: {cart.reduce((acc, val) => acc + val.count, 0)} шт.)
             </td>
           </tr>
           <tr>
