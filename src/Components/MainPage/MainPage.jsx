@@ -23,7 +23,7 @@ function MainPage() {
 
   return (
     <PageLayout backLink={null}>
-      <main className="main-container">{productCards}</main>
+      <ul className="main-container">{productCards}</ul>
     </PageLayout>
   );
 }
