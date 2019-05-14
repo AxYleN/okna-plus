@@ -78,6 +78,12 @@
   fill: currentColor;
 }
 
+.navbar__cart-label {
+  margin: 0;
+
+  color: var(--color-secondary);
+}
+
 .navbar__cart-count-wrapper {
   font-size: var(--font-size-sm);
   line-height: 1;
@@ -113,6 +119,10 @@
     display: flex;
 
     margin-left: auto;
+  }
+
+  .navbar__cart-label {
+    display: none;
   }
 
   .navbar__cart-count-wrapper {

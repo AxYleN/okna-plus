@@ -26,9 +26,10 @@ export default function Navbar(props) {
         <Link to="/">
           <h2 className="navbar__header">Окна-Плюс</h2>
         </Link>
-        <Link to="/cart" className="navbar__link navbar__cart-group">
+        <Link to="/cart" className="navbar__link navbar__cart-group" aria-label="Корзина">
           <ReactSVG src={Cart} svgClassName="navbar__cart-icon" />
           <span className="navbar__cart-count-wrapper">{cart.cart.length}</span>
+          <p className="navbar__cart-label">Корзина</p>
         </Link>
         {backLink}
       </div>
