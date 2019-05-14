@@ -14,7 +14,7 @@ export default function ProductEdit(props) {
       <h1 className="heading">{product.name}</h1>
       <div className="product-edit">
         <Blueprint params={params} type={product.type} />
-        <div className="product-edit__col">
+        <section className="product-edit__col">
           <h2 className="subheading">Параметры</h2>
           <div className="product-edit__info">
             <ProductParams fields={product.fields} params={params} setParams={setParams} />
@@ -26,7 +26,7 @@ export default function ProductEdit(props) {
             </div>
           </div>
           {children}
-        </div>
+        </section>
       </div>
     </>
   );

@@ -337,6 +337,7 @@ export default class BlueprintCanvas extends Component {
         width={resolution}
         ref={this.canvasRef}
         style={{ maxWidth: '100%', maxHeight: '80vh' }}
+        aria-label="Чертёж конструкции"
       />
     );
   }
