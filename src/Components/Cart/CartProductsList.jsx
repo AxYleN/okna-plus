@@ -24,7 +24,7 @@ export default function CartProductsList({ cart, products, onEdit, onRemove, cha
     }
 
     return (
-      <React.Fragment key={id}>
+      <li key={id}>
         <ProductCard
           {...productParams}
           remove={() => onRemove(id)}
@@ -32,11 +32,11 @@ export default function CartProductsList({ cart, products, onEdit, onRemove, cha
           setCount={count => change({ count }, id)}
         />
         <hr />
-      </React.Fragment>
+      </li>
     );
   });
 
-  return <>{productsList}</>;
+  return <ul className="cart__products-list">{productsList}</ul>;
 }
 
 function formatParam(value, field) {

@@ -102,6 +102,12 @@
   margin: 2rem 0 1rem;
 }
 
+.cart__products-list {
+  padding: 0;
+
+  list-style: none;
+}
+
 @media (max-width: 42rem) {
   .cart-footer {
     flex-wrap: wrap;

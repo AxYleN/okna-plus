@@ -12,7 +12,7 @@ export default function ProductCard(props) {
     <div className="product-card">
       <div className="product-card__info">
         <div className="product-card__header">
-          <h2 className="product-card__name">{name}</h2>
+          <h3 className="product-card__name">{name}</h3>
           {edit ? (
             <button className="product-card__button" onClick={edit}>
               Изменить
