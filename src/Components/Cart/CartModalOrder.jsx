@@ -44,6 +44,12 @@ export default function CartModalOrder({ price, onClose, onOrder }) {
     setCustomer({ ...customer, [name]: value });
   }
 
+  function handleKeypress(e) {
+    if (!/[а-яА-Я-]/i.test(e.key)) {
+      e.preventDefault();
+    }
+  }
+
   const inputClass = 'cart-modal-order__input';
   return (
     <Modal onClose={onClose}>
@@ -57,6 +63,8 @@ export default function CartModalOrder({ price, onClose, onOrder }) {
             placeholder="Фамилия*"
             value={customer.lname}
             onChange={handleInput}
+            onKeyPress={handleKeypress}
+            pattern="[а-яА-Я-]{2,}"
             required
           />
           <input
@@ -65,6 +73,8 @@ export default function CartModalOrder({ price, onClose, onOrder }) {
             placeholder="Имя*"
             value={customer.fname}
             onChange={handleInput}
+            onKeyPress={handleKeypress}
+            pattern="[а-яА-Я-]{2,}"
             required
           />
           <input
@@ -73,6 +83,8 @@ export default function CartModalOrder({ price, onClose, onOrder }) {
             placeholder="Отчество"
             value={customer.patronymic}
             onChange={handleInput}
+            onKeyPress={handleKeypress}
+            pattern="[а-яА-Я-]{2,}"
           />
           <MaskedInput
             mask={phoneMask}
