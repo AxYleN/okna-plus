@@ -2,7 +2,15 @@
   overflow-x: auto;
 
   max-width: 100%;
-  margin: 2rem 0;
+  margin-bottom: 2rem;
+}
+
+.admin-orders-list-search {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  margin: 2rem 0 1rem;
 }
 
 .admin-orders-pagination {
@@ -36,10 +44,11 @@
 }
 
 .admin-orders-next-icon {
-  transform: rotateZ(180deg);
   line-height: 1;
 
   width: .85rem;
+
+  transform: rotateZ(180deg);
 
   fill: currentColor;
 }
@@ -48,4 +57,20 @@
   cursor: initial;
 
   opacity: 0;
+}
+
+.input {
+  font-size: 1rem;
+
+  margin: 0 .5rem;
+  padding: 0 .5rem;
+
+  border: none;
+  border-bottom: 2px solid var(--color-secondary);
+  border-radius: 0;
+}
+
+.input:focus {
+  border-bottom-color: var(--color-hero);
+  outline: none;
 }
