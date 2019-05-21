@@ -30,6 +30,8 @@ export default function PhoneInput({ placeholder, ...props }) {
       onFocus={e => (e.target.placeholder = '+7 (___) ___-__-__')}
       onBlur={e => (e.target.placeholder = placeholder)}
       type="tel"
+      pattern="\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}"
+      keepCharPositions={true}
       {...props}
     />
   );
