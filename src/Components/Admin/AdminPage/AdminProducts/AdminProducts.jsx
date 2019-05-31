@@ -226,6 +226,7 @@ function ProductsInputs({ group, values, onChange, name }) {
         name={`${name}-min`}
         value={values.min}
         min={500}
+        max={5000}
         onChange={onChange}
         key={`min-${values.min}`}
       />,
@@ -234,6 +235,7 @@ function ProductsInputs({ group, values, onChange, name }) {
         name={`${name}-max`}
         value={values.max}
         min={500}
+        max={5000}
         onChange={onChange}
         key={`max-${values.max}`}
       />,
