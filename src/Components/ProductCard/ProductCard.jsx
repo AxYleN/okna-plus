@@ -39,7 +39,13 @@ export default function ProductCard(props) {
             {!setCount ? (
               count
             ) : (
-              <RangeInput onChange={(k, v) => setCount(+v)} value={count} min="1" max="10" />
+              <RangeInput
+                onChange={(k, v) => setCount(parseInt(v))}
+                value={count}
+                key={count}
+                min="1"
+                max="10"
+              />
             )}
           </span>
         </div>

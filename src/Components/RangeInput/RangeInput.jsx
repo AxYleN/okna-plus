@@ -26,13 +26,20 @@ export default class RangeInput extends Component {
 
   onKeyPress = e => {
     const key = e.key;
+    const isDecimal = this.props.step < 1 && /(\.|,)/.test(key);
+    
     if (key === 'Enter') e.target.blur();
-    else if (isNaN(key) && !/(\.|,)/.test(key)) e.preventDefault();
+    else if (isNaN(key) && !isDecimal) e.preventDefault();
   };
 
   onBlur = e => {
     const { min, max } = this.props;
     let value = +e.target.value;
+    value = +value.toFixed(2);
+    
+    if (!(this.props.step < 1)) {
+      value = parseInt(value);
+    }
     value = isNaN(value) ? this.props.value : value;
     e.target.value = value <= min ? min : value >= max ? max : value;
 
