@@ -21,7 +21,7 @@ export default class AdminProducts extends Component {
 
     const values = deepCopy(this.state.values);
 
-    path.reduce((el, key) => el[key], values)[name] = parseInt(value);
+    path.reduce((el, key) => el[key], values)[name] = +value;
 
     this.fixMinMax(values);
 
@@ -270,7 +270,7 @@ function ProductsRangeInput({ label, ...rest }) {
   return (
     <label className="product-group__input">
       {label}
-      <RangeInput min={1} {...rest} />
+      <RangeInput min={1} {...rest} step="0.01" />
     </label>
   );
 }
