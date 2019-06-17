@@ -43,7 +43,8 @@ export default function CartModalOrder({ price, onClose, onOrder }) {
             value={customer.lname}
             onChange={handleInput}
             onKeyPress={handleKeypress}
-            pattern="[а-яА-Я-]{2,}"
+            pattern="[а-яА-Я-]{2,35}"
+            maxLength='35'
             required
           />
           <input
@@ -53,7 +54,8 @@ export default function CartModalOrder({ price, onClose, onOrder }) {
             value={customer.fname}
             onChange={handleInput}
             onKeyPress={handleKeypress}
-            pattern="[а-яА-Я-]{2,}"
+            pattern="[а-яА-Я-]{2,25}"
+            maxLength='25'
             required
           />
           <input
@@ -63,7 +65,8 @@ export default function CartModalOrder({ price, onClose, onOrder }) {
             value={customer.patronymic}
             onChange={handleInput}
             onKeyPress={handleKeypress}
-            pattern="[а-яА-Я-]{2,}"
+            pattern="[а-яА-Я-]{2,25}"
+            maxLength='25'
           />
           <PhoneInput
             className={inputClass}
@@ -80,6 +83,7 @@ export default function CartModalOrder({ price, onClose, onOrder }) {
             value={customer.addess}
             onChange={handleInput}
             required
+            maxLength='255'
           />
           <input
             className={inputClass}
